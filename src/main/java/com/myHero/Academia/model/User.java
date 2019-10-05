@@ -2,7 +2,7 @@ package com.myHero.Academia.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import sun.plugin.util.UserProfile;
+import com.myHero.Academia.model.UserProfile
 
 import javax.persistence.*;
 import java.util.ArrayList;

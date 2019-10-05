@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -23,18 +24,19 @@ import java.util.List;
 public class UserServiceImpl  implements UserService{
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
-    @Override
-
-    public Iterable<User> listUsers() {return userRepository.findAll();}
+    @Autowired
+    JwtUtil jwtUtil;
 
     @Autowired
     @Qualifier("encoder")
     PasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
-    JwtUtil jwtUtil;
+
+    @Override
+
+    public Iterable<User> listUsers() {return userRepository.findAll();}
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -43,18 +45,17 @@ public class UserServiceImpl  implements UserService{
         if(user==null)
             throw new UsernameNotFoundException("User null");
 
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), bCryptPasswordEncoder.encode(user.getPassword()),
-                true, true, true, true, getGrantedAuthorities(user));
+        return new org.springframework.security.core.userdetails.User (user.getUsername(), bCryptPasswordEncoder.encode(user.getPassword()),
+        true, true, true, true, getGrantedAuthorities(user));
     }
 
     private List<GrantedAuthority> getGrantedAuthorities(User user){
         List<GrantedAuthority> authorities = new ArrayList<>();
 
-//        authorities.add(new SimpleGrantedAuthority(user.getName()));
+        authorities.add(new SimpleGrantedAuthority(user.getUsername()));
 
         return authorities;
     }
-
 
 
     @Override
