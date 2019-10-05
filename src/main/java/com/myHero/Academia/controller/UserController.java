@@ -1,6 +1,7 @@
 package com.myHero.Academia.controller;
 
 import com.myHero.Academia.model.User;
+import com.myHero.Academia.model.JwtResponse;
 import com.myHero.Academia.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,11 +26,13 @@ public class UserController {
     }
 
     @PostMapping("/signup")
-    public User createUser(@RequestBody User newUser) { return userService.createUser(newUser); }
+    public ResponseEntity<?> createUser(@RequestBody User newUser) {
+        return ResponseEntity.ok(new JwtResponse(userService.createUser(newUser)));
+    }
 
-    @GetMapping("/login/{username}/{password}")
-    public User login(@PathVariable String username, @PathVariable String password){
-        return userService.login(username, password);
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody User user) {
+        return ResponseEntity.ok(new JwtResponse(userService.login(user)));
     }
 
 

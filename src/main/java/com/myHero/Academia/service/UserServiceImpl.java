@@ -1,5 +1,6 @@
 package com.myHero.Academia.service;
 
+import com.myHero.Academia.config.JwtUtil;
 import com.myHero.Academia.model.User;
 import com.myHero.Academia.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Service
 public class UserServiceImpl  implements UserService{
 
     @Autowired
@@ -30,6 +33,9 @@ public class UserServiceImpl  implements UserService{
     @Qualifier("encoder")
     PasswordEncoder bCryptPasswordEncoder;
 
+    @Autowired
+    JwtUtil jwtUtil;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = getUser(username);
@@ -41,8 +47,18 @@ public class UserServiceImpl  implements UserService{
                 true, true, true, true, getGrantedAuthorities(user));
     }
 
+    private List<GrantedAuthority> getGrantedAuthorities(User user){
+        List<GrantedAuthority> authorities = new ArrayList<>();
+
+//        authorities.add(new SimpleGrantedAuthority(user.getName()));
+
+        return authorities;
+    }
+
+
+
     @Override
-    public User createUser(User newUser) {
+    public String createUser(User newUser) {
 
         if(userRepository.save(newUser) != null){
             UserDetails userDetails = loadUserByUsername(newUser.getUsername());
@@ -58,6 +74,12 @@ public class UserServiceImpl  implements UserService{
             return jwtUtil.generateToken(userDetails);
         }
         return null;
+    }
+
+
+    @Override
+    public User getUser(String username){
+        return userRepository.findByUsername(username);
     }
 
 }
