@@ -5,6 +5,10 @@ import java.security.PublicKey;
 
 
 public interface UserProfileService {
+
+    //=== parameter username &  newProfile===//
     UserProfile createUserProfile(String username, UserProfile newProfile);
+
+    //=== parameter username & return username
     UserProfile getUserProfile(String username);
 }

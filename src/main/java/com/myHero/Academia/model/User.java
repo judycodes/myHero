@@ -43,35 +43,27 @@ public class User {
     public User() {}
 
     //=== return Id ===//
-
     public Long getId() {return id;}
 
     //=== parameter Id ===//
-
     public void setId(Long id) {this.id = id;}
 
     //=== return Username ===//
-
     public String getUsername() {return username;}
 
     //=== parameter Username ===//
-
     public void setUsername(String username) {this.username = username;}
 
     //=== return Password ===//
-
     public String getPassword() {return password;}
 
     // parameter Password ===//
-
     public void setPassword(String password) {this.password = password;}
 
     //=== parameter Email ===//
-
     public String getEmail() {return email; }
 
     //=== parameter Email===//
-
     public void setEmail(String email) {this.email = email;}
 
 

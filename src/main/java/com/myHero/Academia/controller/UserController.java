@@ -15,29 +15,31 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    //===return userService.listUsers()===//
     @GetMapping("/user/list")
     public Iterable<User> listUsers() {
-        return userService. listUsers();
+        return userService.listUsers();
     }
 
+
+    //===return "Hello World")===//
     @GetMapping("/hello")
     public String helloWorld() {
         return "Hello World!!";
     }
 
+
+    //===parameter  newUser & return===//
     @PostMapping("/signup")
     public ResponseEntity<?> createUser(@RequestBody User newUser) {
         return ResponseEntity.ok(new JwtResponse(userService.createUser(newUser)));
     }
 
+
+    //=== parameter user & return user===//
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody User user) {
         return ResponseEntity.ok(new JwtResponse(userService.login(user)));
     }
-
-
-
-
-
 
 }

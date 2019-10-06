@@ -14,11 +14,13 @@ public class UserProfileController {
     @Autowired
     UserProfileService userProfileService;
 
+    //=== parameter username & parameter newProfile & return===//
     @PostMapping("/{username}")
     public UserProfile createUserProfile(@PathVariable String username, @RequestBody UserProfile userProfile) {
         return userProfileService.createUserProfile(username, userProfile);
     }
 
+    //=== parameter username & return===//
     @GetMapping("/{username}")
     public UserProfile getUserProfile(@PathVariable String username) {
         return userProfileService.getUserProfile(username);
