@@ -19,6 +19,8 @@ public class UserProfileServiceImpl implements UserProfileService{
     @Autowired
     UserRepository userRepository;
 
+
+    //=== parameter username & parameter newProfile & return newProfile===//
     @Override
     public UserProfile createUserProfile(String username, UserProfile newProfile) {
         User user = userService.getUser(username);
@@ -27,6 +29,7 @@ public class UserProfileServiceImpl implements UserProfileService{
         return userProfileRepository.save(newProfile);
     }
 
+    //=== parameter username & return//
     @Override
     public UserProfile getUserProfile(String username) {
         return userProfileRepository.findProfileByUsername(username);

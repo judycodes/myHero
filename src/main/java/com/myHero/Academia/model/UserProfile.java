@@ -15,7 +15,7 @@ public class UserProfile {
     private String mobile;
 
     @Column
-    private String address;
+    private String secondary_email;
 
     @JsonIgnore
     @OneToOne(mappedBy = "userProfile", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
@@ -25,36 +25,43 @@ public class UserProfile {
     public UserProfile() {
     }
 
+    // ===return user ===//
     public User getUser() {
         return user;
     }
 
+    //=== parameter user ===//
     public void setUser(User user) {
         this.user = user;
     }
 
+    // ===return Id ===//
     public Long getId() {
         return id;
     }
 
+    //=== parameter id ===//
     public void setId(Long id) {
         this.id = id;
     }
 
+    // ===return Mobile ===//
     public String getMobile() {
         return mobile;
     }
-
+    //=== parameter mobile ===//
     public void setMobile(String mobile) {
         this.mobile = mobile;
     }
 
-    public String getAddress() {
-        return address;
+    // ===return Secondary_email ===//
+    public String getSecondary_email() {
+        return secondary_email;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    //=== parameter secondary_email ===//
+    public void setSecondary_email(String secondary_email) {
+        this.secondary_email = secondary_email;
     }
 
 
