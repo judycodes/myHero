@@ -3,6 +3,8 @@ package com.myHero.Academia.service;
 import com.myHero.Academia.model.Post;
 import org.springframework.http.HttpStatus;
 
+import java.util.List;
+
 public interface PostService {
 
     //=== parameter newPost & return Post ===//
@@ -16,4 +18,6 @@ public interface PostService {
 
     //=== parameter post_id & return specific post ===//
     public Post getSpecificPost(long post_id);
+
+    public List<Post> listUserPosts(long user_id);
 }
