@@ -8,9 +8,4 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CommentRepository extends CrudRepository<Comment, Long> {
 
-    void deleteById(Long comment_id);
-
-    @Query(" {'id' : ?0}")
-    public Comment findCommentBy (Long comment_id);
-
 }
