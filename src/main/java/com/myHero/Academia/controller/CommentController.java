@@ -15,9 +15,9 @@ public class CommentController {
     @Autowired
     CommentService commentService;
 
-    @PostMapping("{username}/create")
-    public Comment createComment(@PathVariable String username,  @RequestBody Comment newComment) {
-        return commentService.createComment(newComment, username); }
+    @PostMapping("{username}/createOn{post_id}")
+    public Comment createComment(@PathVariable String username,  @PathVariable long post_id, @RequestBody Comment newComment) {
+        return commentService.createComment(newComment, username, post_id); }
 
     @GetMapping("/listAllComments")
     public Iterable<Comment> listAllComments() {

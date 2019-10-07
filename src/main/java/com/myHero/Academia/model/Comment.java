@@ -31,6 +31,15 @@ public class Comment {
 
     public void setUser(User user) {this.user = user;}
 
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST,
+    CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "post_id")
+    private Post post;
+
+    public Post getPost() {return post;}
+
+    public void setPost(Post post) {this.post = post;}
+
 
     //=== empty constructor ===//
     public Comment() {}

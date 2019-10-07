@@ -9,7 +9,7 @@ import java.util.List;
 public interface CommentService {
 
     //=== parameter newComment & return Post ===//
-    public Comment createComment(Comment newComment, String username);
+    public Comment createComment(Comment newComment, String username, long post_id);
 
     //=== return all comments ===//
     public Iterable<Comment> listAllComments();
@@ -21,5 +21,7 @@ public interface CommentService {
     public Comment getSpecificComment(long comment_id);
 
     public List<Comment> listUserComments(String username);
+
+//    public List<Comment> listPostComments(Post post);
 
 }
