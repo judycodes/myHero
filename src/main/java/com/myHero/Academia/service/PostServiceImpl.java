@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PostServiceImpl implements PostService {
 
@@ -42,4 +44,9 @@ public class PostServiceImpl implements PostService {
     public Post getSpecificPost(long post_id) {
         return postRepository.findPostById(post_id);
     }
+
+    @Override
+    public List<Post> listUserPosts(String username) {
+        User user = userRepository.findByUsername(username);
+        return postRepository.findPostsByUser(user); }
 }
