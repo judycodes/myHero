@@ -40,6 +40,6 @@ public class PostController {
         return postService.getSpecificPost(post_id);
     }
 
-    @GetMapping("/get-{user_id}Posts")
-    public List<Post> listUserPosts(@PathVariable long user_id) { return postService.listUserPosts(user_id); }
+    @GetMapping("/get-{username}Posts")
+    public List<Post> listUserPosts(@PathVariable String username) { return postService.listUserPosts(username); }
 }

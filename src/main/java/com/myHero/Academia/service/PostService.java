@@ -19,5 +19,5 @@ public interface PostService {
     //=== parameter post_id & return specific post ===//
     public Post getSpecificPost(long post_id);
 
-    public List<Post> listUserPosts(long user_id);
+    public List<Post> listUserPosts(String username);
 }
