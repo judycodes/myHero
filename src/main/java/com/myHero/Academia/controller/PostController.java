@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/post")
 public class PostController {
@@ -37,4 +39,7 @@ public class PostController {
     public Post getSpecificPost(@PathVariable long post_id) {
         return postService.getSpecificPost(post_id);
     }
+
+    @GetMapping("/get-{username}Posts")
+    public List<Post> listUserPosts(@PathVariable String username) { return postService.listUserPosts(username); }
 }
