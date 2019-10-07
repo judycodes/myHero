@@ -3,6 +3,7 @@ package com.myHero.Academia.service;
 import com.myHero.Academia.model.Comment;
 import com.myHero.Academia.repository.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,5 +23,11 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Iterable<Comment> listAllComments() {
         return commentRepository.findAll();
+    }
+
+    @Override
+    public HttpStatus deleteSpecificComment(long comment_id) {
+        commentRepository.deleteById(comment_id);
+        return HttpStatus.valueOf(200);
     }
 }

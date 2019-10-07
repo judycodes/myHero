@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface CommentRepository extends CrudRepository<Comment, Long> {
 
+    void deleteById(Long comment_id);
+
 }
