@@ -12,5 +12,5 @@ public interface CommentRepository extends CrudRepository<Comment, Long> {
 
     @Query(" {'id' : ?0}")
     public Comment findCommentBy (Long comment_id);
-    
+
 }
