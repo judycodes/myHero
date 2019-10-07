@@ -16,12 +16,11 @@ public interface PostRepository extends CrudRepository<Post, Long> {
     @Query(" {'id' : ?0} ")
     public Post findPostById (Long post_id);
 
-//    @Query("SELECT * FROM Post WHERE post.username = ?0")
-//    public Post findAllByUsername(String username);
-
+//find user's posts by id
 //    @Query(" {'id' : ?0} ")
 //    public List<Post> findPostsByUserId (long user_id);
 
+//find user's posts by user object/ username
     @Query(" {'user' : ?0} ")
     public List<Post> findPostsByUser(User user);
 }
