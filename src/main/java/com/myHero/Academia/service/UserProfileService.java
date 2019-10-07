@@ -3,7 +3,6 @@ import com.myHero.Academia.model.UserProfile;
 
 import java.security.PublicKey;
 
-
 public interface UserProfileService {
 
     //=== parameter username &  newProfile===//

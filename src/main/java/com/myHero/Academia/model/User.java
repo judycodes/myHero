@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.myHero.Academia.model.UserProfile;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,

@@ -1,22 +1,20 @@
 package com.myHero.Academia.service;
 
 import com.myHero.Academia.model.User;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.userdetails.UserDetailsService;
-
 
 
 public interface UserService extends UserDetailsService {
 
-    //===return list of users===//
+    //=== return all users ===//
     public Iterable<User> listUsers();
 
-    //===parameter newUser & return===//
+    //===parameter newUser & return token ===//
     public String createUser (User newUser);
 
-    //===parameter user & return ===//
+    //===parameter user & return token ===//
     public String login(User user);
 
-    //=== parameter username * return===//
+    //=== parameter username & return User ===//
     public User getUser(String username);
 }
