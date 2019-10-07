@@ -24,4 +24,10 @@ public class PostServiceImpl implements PostService {
     public Iterable<Post> listAllPosts() {
         return postRepository.findAll();
     }
+
+    @Override
+    public HttpStatus deleteSpecificPost(long post_id) {
+        postRepository.deleteById(post_id);
+        return HttpStatus.valueOf(200);
+    }
 }

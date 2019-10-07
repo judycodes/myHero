@@ -10,4 +10,7 @@ public interface PostService {
 
     //=== return all posts ===//
     public Iterable<Post> listAllPosts();
+
+    //=== parameter post_id & return OK message ===//
+    public HttpStatus deleteSpecificPost(long post_id);
 }

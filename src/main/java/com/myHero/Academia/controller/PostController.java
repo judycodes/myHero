@@ -22,4 +22,9 @@ public class PostController {
     public Iterable<Post> listAllPosts() {
         return postService.listAllPosts();
     }
+
+    @DeleteMapping("/delete-{post_id}")
+    public HttpStatus deleteSpecificPost(@PathVariable long post_id) {
+        return postService.deleteSpecificPost(post_id);
+    }
 }
