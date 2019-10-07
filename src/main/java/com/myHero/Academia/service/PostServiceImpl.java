@@ -20,4 +20,8 @@ public class PostServiceImpl implements PostService {
         return postRepository.save(newPost);
     }
 
+    @Override
+    public Iterable<Post> listAllPosts() {
+        return postRepository.findAll();
+    }
 }
