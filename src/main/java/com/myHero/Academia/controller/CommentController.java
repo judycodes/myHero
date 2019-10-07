@@ -39,8 +39,8 @@ public class CommentController {
         return commentService.listAllPostComments(post_id);
     }
 
-    @GetMapping("{username}/getCommentOn{post_id}")
-    public List<Comment> listUserComment(@PathVariable long post_id, @PathVariable String username) {
-        return commentService.listUserComments(post_id, username);
+    @GetMapping("/get{username}Comments")
+    public List<Comment> listUserComment(@PathVariable String username) {
+        return commentService.listUserComments(username);
     }
 }

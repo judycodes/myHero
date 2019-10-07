@@ -56,11 +56,11 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<Comment> listUserComments(long post_id, String username) {
-        Post post = postRepository.findPostById(post_id);
+    public List<Comment> listUserComments(String username) {
+
         User user = userRepository.findByUsername(username);
-        System.out.println(user);
-        return commentRepository.findCommentsByPost(post); }
+
+        return commentRepository.findCommentsByUser(user); }
 
 
 //     @Override
