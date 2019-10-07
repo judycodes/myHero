@@ -22,5 +22,5 @@ public interface CommentRepository extends CrudRepository<Comment, Long> {
     public List<Comment> findCommentsByUser(User user);
 
     @Query("{'post' : ?0)")
-            List<Comment> findCommentByPost(Post post);
+            List<Comment> findCommentsByPost(Post post);
 }

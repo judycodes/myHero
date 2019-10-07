@@ -42,6 +42,9 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    public Iterable<Comment> listAllPostComments(long post_id) {return commentRepository.findAll();}
+
+    @Override
     public HttpStatus deleteSpecificComment(long comment_id) {
         commentRepository.deleteById(comment_id);
         return HttpStatus.valueOf(200);
@@ -53,9 +56,11 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<Comment> listUserComments(String username) {
+    public List<Comment> listUserComments(long post_id, String username) {
+        Post post = postRepository.findPostById(post_id);
         User user = userRepository.findByUsername(username);
-        return commentRepository.findCommentsByUser(user); }
+        System.out.println(user);
+        return commentRepository.findCommentsByPost(post); }
 
 
 //     @Override

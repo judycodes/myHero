@@ -34,8 +34,13 @@ public class CommentController {
         return commentService.getSpecificComment(comment_id);
     }
 
-    @GetMapping("/get-{username}Comments")
-    public List<Comment> listUserComment(@PathVariable String username) {
-        return commentService.listUserComments(username);
+    @GetMapping("/listAllPostComments/{post_id}")
+    public Iterable<Comment> listAllPostComments(@PathVariable long post_id) {
+        return commentService.listAllPostComments(post_id);
+    }
+
+    @GetMapping("{username}/getCommentOn{post_id}")
+    public List<Comment> listUserComment(@PathVariable long post_id, @PathVariable String username) {
+        return commentService.listUserComments(post_id, username);
     }
 }
