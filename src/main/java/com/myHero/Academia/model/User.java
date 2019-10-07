@@ -39,6 +39,7 @@ public class User {
     //=== parameter userProfile ===//
     public void setUserProfile(UserProfile userProfile) {this.userProfile = userProfile;}
 
+
     //=== empty constructor ===//
     public User() {}
 
@@ -69,6 +70,8 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Post> posts;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Comment> comments;
 
 
 }

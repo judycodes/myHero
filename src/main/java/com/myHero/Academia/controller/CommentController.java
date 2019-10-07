@@ -13,8 +13,9 @@ public class CommentController {
     @Autowired
     CommentService commentService;
 
-    @PostMapping("/create")
-    public Comment createComment(@RequestBody Comment newComment) { return commentService.createComment(newComment); }
+    @PostMapping("{username}/create")
+    public Comment createComment(@PathVariable String username,  @RequestBody Comment newComment) {
+        return commentService.createComment(newComment, username); }
 
     @GetMapping("/listAllComments")
     public Iterable<Comment> listAllComments() {

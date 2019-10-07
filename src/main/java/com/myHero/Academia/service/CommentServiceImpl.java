@@ -1,7 +1,9 @@
 package com.myHero.Academia.service;
 
 import com.myHero.Academia.model.Comment;
+import com.myHero.Academia.model.User;
 import com.myHero.Academia.repository.CommentRepository;
+import com.myHero.Academia.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -15,8 +17,13 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     CommentService commentService;
 
+    @Autowired
+    UserRepository userRepository;
+
     @Override
-    public Comment createComment(Comment newComment) {
+    public Comment createComment(Comment newComment, String username) {
+        User user = userRepository.findByUsername(username);
+        newComment.setUser(user);
         return commentRepository.save(newComment);
     }
 
