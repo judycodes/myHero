@@ -1,7 +1,10 @@
 package com.myHero.Academia.service;
 
 import com.myHero.Academia.model.Comment;
+import com.myHero.Academia.model.Post;
 import org.springframework.http.HttpStatus;
+
+import java.util.List;
 
 public interface CommentService {
 
@@ -16,5 +19,7 @@ public interface CommentService {
 
     //=== parameter post_id & return specific comment ===//
     public Comment getSpecificComment(long comment_id);
+
+    public List<Comment> listUserComments(String username);
 
 }

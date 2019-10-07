@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/comment")
 public class CommentController {
@@ -30,5 +32,10 @@ public class CommentController {
     @GetMapping("/get-{comment_id}")
     public Comment getSpecificComment(@PathVariable long comment_id) {
         return commentService.getSpecificComment(comment_id);
+    }
+
+    @GetMapping("/get-{username}Comments")
+    public List<Comment> listUserComment(@PathVariable String username) {
+        return commentService.listUserComments(username);
     }
 }

@@ -1,12 +1,15 @@
 package com.myHero.Academia.service;
 
 import com.myHero.Academia.model.Comment;
+import com.myHero.Academia.model.Post;
 import com.myHero.Academia.model.User;
 import com.myHero.Academia.repository.CommentRepository;
 import com.myHero.Academia.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -42,4 +45,9 @@ public class CommentServiceImpl implements CommentService {
     public Comment getSpecificComment(long comment_id) {
         return commentRepository.findCommentById(comment_id);
     }
+
+    @Override
+    public List<Comment> listUserComments(String username) {
+        User user = userRepository.findByUsername(username);
+        return commentRepository.findCommentsByUser(user); }
 }
