@@ -7,6 +7,7 @@ public interface CommentService {
     //=== parameter newComment & return Post ===//
     public Comment createComment(Comment newComment);
 
-
+    //=== return all comments ===//
+    public Iterable<Comment> listAllComments();
 
 }

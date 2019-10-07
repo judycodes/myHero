@@ -19,5 +19,8 @@ public class CommentServiceImpl implements CommentService {
         return commentRepository.save(newComment);
     }
 
-
+    @Override
+    public Iterable<Comment> listAllComments() {
+        return commentRepository.findAll();
+    }
 }
