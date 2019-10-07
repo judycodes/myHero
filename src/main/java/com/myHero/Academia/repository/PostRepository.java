@@ -10,4 +10,8 @@ public interface PostRepository extends CrudRepository<Post, Long> {
 
     void deleteById(Long post_id);
 
+    @Query(" {'id' : ?0} ")
+    public Post findPostById (Long post_id);
+
+
 }

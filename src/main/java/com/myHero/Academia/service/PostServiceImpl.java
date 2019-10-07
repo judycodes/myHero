@@ -30,4 +30,9 @@ public class PostServiceImpl implements PostService {
         postRepository.deleteById(post_id);
         return HttpStatus.valueOf(200);
     }
+
+    @Override
+    public Post getSpecificPost(long post_id) {
+        return postRepository.findPostById(post_id);
+    }
 }

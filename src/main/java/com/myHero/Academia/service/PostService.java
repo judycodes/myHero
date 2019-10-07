@@ -13,4 +13,7 @@ public interface PostService {
 
     //=== parameter post_id & return OK message ===//
     public HttpStatus deleteSpecificPost(long post_id);
+
+    //=== parameter post_id & return specific post ===//
+    public Post getSpecificPost(long post_id);
 }

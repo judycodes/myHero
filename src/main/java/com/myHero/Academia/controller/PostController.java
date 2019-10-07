@@ -27,4 +27,9 @@ public class PostController {
     public HttpStatus deleteSpecificPost(@PathVariable long post_id) {
         return postService.deleteSpecificPost(post_id);
     }
+
+    @GetMapping("/get-{post_id}")
+    public Post getSpecificPost(@PathVariable long post_id) {
+        return postService.getSpecificPost(post_id);
+    }
 }
