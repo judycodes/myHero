@@ -14,4 +14,7 @@ public interface CommentService {
     //=== parameter comment_id & return OK message ===//
     public HttpStatus deleteSpecificComment(long comment_id);
 
+    //=== parameter post_id & return specific comment ===//
+    public Comment getSpecificComment(long comment_id);
+
 }

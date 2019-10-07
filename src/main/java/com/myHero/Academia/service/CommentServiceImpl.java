@@ -30,4 +30,9 @@ public class CommentServiceImpl implements CommentService {
         commentRepository.deleteById(comment_id);
         return HttpStatus.valueOf(200);
     }
+
+    @Override
+    public Comment getSpecificComment(long comment_id) {
+        return commentRepository.findCommentById(comment_id);
+    }
 }

@@ -10,4 +10,6 @@ public interface CommentRepository extends CrudRepository<Comment, Long> {
 
     void deleteById(Long comment_id);
 
+    @Query(" {'id' : ?0}")
+    public Comment findCommentById (Long comment_id);
 }

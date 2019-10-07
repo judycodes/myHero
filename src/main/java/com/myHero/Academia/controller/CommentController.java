@@ -25,4 +25,9 @@ public class CommentController {
     public HttpStatus deleteSpecificComment(@PathVariable long comment_id) {
         return commentService.deleteSpecificComment(comment_id);
     }
+
+    @GetMapping("/get-{comment_id}")
+    public Comment getSpecificComment(@PathVariable long comment_id) {
+        return commentService.getSpecificComment(comment_id);
+    }
 }
