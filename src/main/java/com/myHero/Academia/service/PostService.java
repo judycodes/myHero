@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 public interface PostService {
 
     //=== parameter newPost & return Post ===//
-    public Post createPost(Post newPost);
+    public Post createPost(Post newPost, String username);
 
     //=== return all posts ===//
     public Iterable<Post> listAllPosts();

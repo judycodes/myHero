@@ -1,6 +1,8 @@
 package com.myHero.Academia.controller;
 
 import com.myHero.Academia.model.Post;
+import com.myHero.Academia.model.User;
+import com.myHero.Academia.repository.UserRepository;
 import com.myHero.Academia.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,9 +15,12 @@ public class PostController {
     @Autowired
     PostService postService;
 
-    @PostMapping("/create")
-    public Post createPost(@RequestBody Post newPost) {
-        return postService.createPost(newPost);
+    @Autowired
+    UserRepository userRepository;
+
+    @PostMapping("{username}/create")
+    public Post createPost(@PathVariable String username, @RequestBody Post newPost) {
+        return postService.createPost(newPost, username);
     }
 
     @GetMapping("/listAllPosts")

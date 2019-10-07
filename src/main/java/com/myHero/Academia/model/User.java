@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.myHero.Academia.model.UserProfile;
 
 import javax.persistence.*;
+import java.util.List;
 
 @JsonIdentityInfo(
         generator = ObjectIdGenerators.PropertyGenerator.class,
@@ -65,10 +66,8 @@ public class User {
     //=== parameter Email===//
     public void setEmail(String email) {this.email = email;}
 
-
-
-
-
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Post> posts;
 
 
 
