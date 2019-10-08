@@ -50,8 +50,16 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public HttpStatus deleteSpecificComment(long comment_id) {
-        commentRepository.deleteById(comment_id);
-        return HttpStatus.valueOf(200);
+        //username of current user attempting to delete comment
+        String currentUsername = securityController.getCurrentUserName();
+
+        if(commentRepository.findCommentById(comment_id).getUser().getUsername().equals(currentUsername)) {
+            commentRepository.deleteById(comment_id);
+            return HttpStatus.valueOf(200);
+        } else {
+            return HttpStatus.BAD_REQUEST;
+        }
+
     }
 
     @Override
