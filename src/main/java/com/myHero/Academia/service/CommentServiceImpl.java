@@ -65,5 +65,5 @@ public class CommentServiceImpl implements CommentService {
         User user = userRepository.findByUsername(securityController.getCurrentUserName());
 
         return commentRepository.findCommentsByUser(user); }
-        
+
 }
