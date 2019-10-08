@@ -65,7 +65,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post getSpecificPost(long post_id) {
-        return postRepository.findPostById(post_id);
+        return postRepository.findById(post_id).get();
     }
 
     @Override
