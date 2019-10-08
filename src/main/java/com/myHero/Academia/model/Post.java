@@ -26,7 +26,6 @@ public class Post {
     @Column
     private String post_body;
 
-
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "user_id")
     private User user;
@@ -72,5 +71,8 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
+    public List<Comment> getComments() {return comments;}
+
+    public void setComments(List<Comment> comments) {this.comments = comments;}
 
 }
