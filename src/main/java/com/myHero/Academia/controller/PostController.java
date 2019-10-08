@@ -39,6 +39,6 @@ public class PostController {
         return postService.getSpecificPost(post_id);
     }
 
-    @GetMapping("/get{username}Posts")
-    public List<Post> listUserPosts(@PathVariable String username) { return postService.listUserPosts(username); }
+    @GetMapping("/listUserPosts")
+    public List<Post> listUserPosts() { return postService.listUserPosts(); }
 }

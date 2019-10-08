@@ -32,7 +32,7 @@ public class UserProfileControllerTest {
 //        userProfile.setSecondary_email(null); // this is not mean to work
 
         //UserProfile newProfile = userProfileController.createUserProfile("Jean", userProfile);
-        UserProfile newProfile = userProfileController.createUserProfile("Jean", userProfile);
+        UserProfile newProfile = userProfileController.createUserProfile(userProfile);
 
         Assert.assertNotNull(newProfile);
         Assert.assertEquals(newProfile.getSecondary_email(), userProfile.getSecondary_email());
