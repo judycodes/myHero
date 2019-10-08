@@ -40,6 +40,6 @@ public class PostController {
         return postService.getSpecificPost(post_id);
     }
 
-    @GetMapping("/getPosts")
+    @GetMapping("/listUserPosts")
     public List<Post> listUserPosts() { return postService.listUserPosts(); }
 }
