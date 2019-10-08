@@ -1,5 +1,6 @@
 package com.myHero.Academia.service;
 
+import com.myHero.Academia.controller.SecurityController;
 import com.myHero.Academia.model.Comment;
 import com.myHero.Academia.model.Post;
 import com.myHero.Academia.model.User;
@@ -27,9 +28,12 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     PostRepository postRepository;
 
+    @Autowired
+    SecurityController securityController;
+
     @Override
-    public Comment createComment(Comment newComment, String username, long post_id) {
-        User user = userRepository.findByUsername(username);
+    public Comment createComment(Comment newComment, long post_id) {
+        User user = userRepository.findByUsername(securityController.getCurrentUserName());
         Post post = postRepository.findPostById(post_id);
         newComment.setPost(post);
         newComment.setUser(user);
@@ -56,16 +60,10 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<Comment> listUserComments(String username) {
+    public List<Comment> listUserComments() {
 
-        User user = userRepository.findByUsername(username);
+        User user = userRepository.findByUsername(securityController.getCurrentUserName());
 
         return commentRepository.findCommentsByUser(user); }
-
-
-//     @Override
-//    public List<Comment> listPostComments(Post post) {
-//        Post post = postRepository.findPostsByUser()
-//     }
-
+        
 }
