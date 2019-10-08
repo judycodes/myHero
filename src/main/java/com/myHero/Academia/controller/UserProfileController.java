@@ -22,6 +22,7 @@ public class UserProfileController {
 
     //=== parameter username & parameter newProfile & return===//
     @PostMapping
+    //@PutMapping
     public UserProfile createUserProfile(@RequestBody UserProfile userProfile) {
         return userProfileService.createUserProfile(userProfile);
     }
@@ -30,10 +31,6 @@ public class UserProfileController {
     @GetMapping
     public UserProfile getUserProfile() {
         return userProfileService.getUserProfile();
-
-
-
-
     }
 
 }
