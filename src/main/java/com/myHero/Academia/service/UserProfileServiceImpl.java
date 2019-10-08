@@ -44,12 +44,5 @@ public class UserProfileServiceImpl implements UserProfileService{
         return userProfileRepository.findProfileByUsername(username);
 
     }
-
-//    //===Testing stubs, parameter userService & userProfileRepository===//
-//    @Autowired
-//    public UserProfileServiceImpl(UserProfileService userProfileService){
-//        this.userProfileService = userProfileService;
-//        //this.userProfileRepository = userProfileRepository;
-//    }
-
+    
 }
