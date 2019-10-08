@@ -20,9 +20,9 @@ public class PostController {
     @Autowired
     UserRepository userRepository;
 
-    @PostMapping("{username}/create")
-    public Post createPost(@PathVariable String username, @RequestBody Post newPost) {
-        return postService.createPost(newPost, username);
+    @PostMapping("/create")
+    public Post createPost(@RequestBody Post newPost) {
+        return postService.createPost(newPost);
     }
 
     @GetMapping("/listAllPosts")

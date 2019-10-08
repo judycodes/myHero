@@ -8,7 +8,7 @@ import java.util.List;
 public interface PostService {
 
     //=== parameter newPost & return Post ===//
-    public Post createPost(Post newPost, String username);
+    public Post createPost(Post newPost);
 
     //=== return all posts ===//
     public Iterable<Post> listAllPosts();
