@@ -32,6 +32,7 @@ public class UserControllerTest {
     @MockBean
     private UserService userService;
 
+    //=== hello endpoint test ===//
     @Test
     public void helloWorld_ReturnsString_Success() throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders
@@ -43,7 +44,13 @@ public class UserControllerTest {
                 .andExpect(content().string("Hello World!!"));
     }
 
+    //=== custom method ===//
+    private static String createDummyUserInJson(String name, String password) {
+        return "{  \"name\" : \"" + name + "\"," +
+                "\"password\" : \"" + password + "\"}";
+    }
 
+    //=== login endpoint test ===//
     @Test
     public void login_Success() throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders
@@ -52,7 +59,7 @@ public class UserControllerTest {
                 .content(createDummyUserInJson("deku", "quirky"));
 
         when(userService.login(any())).thenReturn("oneforall"); //test passes
-        //when(userService.login(any())).thenReturn("noquirk"); //test fails
+        //when(userService.login(any())).thenReturn("noquirk"); //test meant to fail
 
         MvcResult result = mockMvc.perform(requestBuilder)
                 .andExpect(status().isOk())
@@ -62,9 +69,24 @@ public class UserControllerTest {
         System.out.println(result.getResponse().getContentAsString());
     }
 
-    private static String createDummyUserInJson(String name, String password) {
-        return "{  \"name\" : \"" + name + "\"," +
-                "\"password\" : \"" + password + "\"}";
+    //=== signup endpoint test ===//
+    @Test
+    public void signup_Success() throws Exception {
+        RequestBuilder requestBuilder = MockMvcRequestBuilders
+                .post("/signup")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(createDummyUserInJson("bakugo", "hero"));
+
+        when(userService.createUser(any())).thenReturn("0987"); //test passes
+        //when(userService.createUser(any())).thenReturn("000"); //test meant to fail
+
+        MvcResult result = mockMvc.perform(requestBuilder)
+                .andExpect(status().isOk())
+                .andExpect(content().json("{\"token\" : \"0987\"}"))
+                .andReturn();
+
+
+        System.out.println(result.getResponse().getContentAsString());
     }
 
 
