@@ -43,4 +43,5 @@ public class CommentController {
     public List<Comment> listUserComment(@PathVariable String username) {
         return commentService.listUserComments(username);
     }
+
 }
