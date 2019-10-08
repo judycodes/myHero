@@ -1,5 +1,6 @@
 package com.myHero.Academia.service;
 
+import com.myHero.Academia.controller.SecurityController;
 import com.myHero.Academia.model.User;
 import com.myHero.Academia.model.UserProfile;
 import com.myHero.Academia.repository.UserRepository;
@@ -17,12 +18,19 @@ public class UserProfileServiceImpl implements UserProfileService{
     UserService userService;
 
     @Autowired
+    SecurityController securityController;
+
+    @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    UserProfileService userProfileService;
 
 
     //=== parameter username & parameter newProfile & return newProfile===//
     @Override
-    public UserProfile createUserProfile(String username, UserProfile newProfile) {
+    public UserProfile createUserProfile(UserProfile newProfile) {
+        String username = securityController.getCurrentUserName();
         User user = userService.getUser(username);
         newProfile.setUser(user);
         user.setUserProfile(newProfile);
@@ -31,16 +39,17 @@ public class UserProfileServiceImpl implements UserProfileService{
 
     //=== parameter username & return//
     @Override
-    public UserProfile getUserProfile(String username) {
+    public UserProfile getUserProfile() {
+        String username = securityController.getCurrentUserName();
         return userProfileRepository.findProfileByUsername(username);
 
     }
 
-    //===Testing stubs, parameter userService & userProfileRepository===//
-    @Autowired
-    public UserProfileServiceImpl(UserService userService, UserProfileRepository userProfileRepository){
-        this.userService = userService;
-        this.userProfileRepository = userProfileRepository;
-    }
+//    //===Testing stubs, parameter userService & userProfileRepository===//
+//    @Autowired
+//    public UserProfileServiceImpl(UserProfileService userProfileService){
+//        this.userProfileService = userProfileService;
+//        //this.userProfileRepository = userProfileRepository;
+//    }
 
 }

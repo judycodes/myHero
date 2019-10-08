@@ -21,15 +21,15 @@ public class UserProfileController {
     }
 
     //=== parameter username & parameter newProfile & return===//
-    @PostMapping("/{username}")
-    public UserProfile createUserProfile(@PathVariable String username, @RequestBody UserProfile userProfile) {
-        return userProfileService.createUserProfile(username, userProfile);
+    @PostMapping
+    public UserProfile createUserProfile(@RequestBody UserProfile userProfile) {
+        return userProfileService.createUserProfile(userProfile);
     }
 
     //=== parameter username & return===//
-    @GetMapping("/{username}")
-    public UserProfile getUserProfile(@PathVariable String username) {
-        return userProfileService.getUserProfile(username);
+    @GetMapping
+    public UserProfile getUserProfile() {
+        return userProfileService.getUserProfile();
 
 
 

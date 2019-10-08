@@ -1,5 +1,7 @@
 package com.myHero.Academia.service;
 
+import com.myHero.Academia.controller.UserProfileController;
+import com.myHero.Academia.model.User;
 import com.myHero.Academia.model.UserProfile;
 import com.myHero.Academia.repository.UserProfileRepositoryStub;
 import org.junit.Assert;
@@ -9,11 +11,12 @@ import org.mockito.Mock;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 public class UserProfileServiceTest {
-    private UserProfileServiceImpl userProfileService;
-
+    private UserProfileController userProfileController;
     @Before
     public void initializeUserProfile(){
-        userProfileService = new UserProfileServiceImpl(new UserServiceStub(), new UserProfileRepositoryStub());
+        userProfileController = new UserProfileController();
+        userProfileController.setUserProfileService( new UserProfileServiceStub());
+
 
 
     }
@@ -23,9 +26,9 @@ public class UserProfileServiceTest {
         UserProfile userProfile = new UserProfile();
         userProfile.setSecondary_email("iAmBetterThanJean@Ruler.com");
 
-        UserProfile newProfile = userProfileService.createUserProfile("Jean", userProfile); // meant to pass
+//        UserProfile newProfile = userProfileController.createUserProfile(userProfile); // meant to pass
 
-//        UserProfile newProfile = userProfileService.createUserProfile("Jean", null); //meant to fail
+        UserProfile newProfile = userProfileController.createUserProfile(null); //meant to fail
 
         System.out.println(newProfile);
         Assert.assertNotNull(newProfile);
