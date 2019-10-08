@@ -34,6 +34,7 @@ public class PostServiceImpl implements PostService {
     @Autowired
     CommentRepository commentRepository;
 
+
     @Override
     public Post createPost(Post newPost) {
         String username = securityController.getCurrentUserName();
@@ -49,8 +50,17 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public HttpStatus deleteSpecificPost(long post_id) {
-        postRepository.deleteById(post_id);
-        return HttpStatus.valueOf(200);
+        String currentUsername = securityController.getCurrentUserName();
+
+        if(postRepository.findPostById(post_id).getUser().getUsername().equals(currentUsername)){
+            postRepository.deleteById(post_id);
+            return HttpStatus.valueOf(200);
+        }else{
+            return HttpStatus.BAD_REQUEST;
+        }
+
+
+
     }
 
     @Override
