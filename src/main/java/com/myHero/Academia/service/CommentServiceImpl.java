@@ -34,9 +34,11 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public Comment createComment(Comment newComment, long post_id) {
         User user = userRepository.findByUsername(securityController.getCurrentUserName());
-        Post post = postRepository.findPostById(post_id);
-        newComment.setPost(post);
         newComment.setUser(user);
+
+        Post post = postRepository.findById(post_id).get();
+        newComment.setPost(post);
+
         return commentRepository.save(newComment);
     }
 
