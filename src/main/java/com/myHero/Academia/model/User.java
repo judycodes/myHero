@@ -39,7 +39,6 @@ public class User {
     //=== parameter userProfile ===//
     public void setUserProfile(UserProfile userProfile) {this.userProfile = userProfile;}
 
-
     //=== empty constructor ===//
     public User() {}
 
