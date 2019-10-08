@@ -1,5 +1,6 @@
 package com.myHero.Academia.service;
 
+import com.myHero.Academia.controller.SecurityController;
 import com.myHero.Academia.model.Comment;
 import com.myHero.Academia.model.Post;
 import com.myHero.Academia.model.User;
@@ -28,10 +29,14 @@ public class PostServiceImpl implements PostService {
     CommentService commentService;
 
     @Autowired
+    SecurityController securityController;
+
+    @Autowired
     CommentRepository commentRepository;
 
     @Override
-    public Post createPost(Post newPost, String username) {
+    public Post createPost(Post newPost) {
+        String username = securityController.getCurrentUserName();
         User user = userRepository.findByUsername(username);
         newPost.setUser(user);
         return postRepository.save(newPost);
