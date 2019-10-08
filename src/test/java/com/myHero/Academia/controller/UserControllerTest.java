@@ -13,7 +13,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -32,7 +31,7 @@ public class UserControllerTest {
     @MockBean
     private UserService userService;
 
-    //=== hello endpoint test ===//
+    //=== hello test ===//
     @Test
     public void helloWorld_ReturnsString_Success() throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders
@@ -50,7 +49,7 @@ public class UserControllerTest {
                 "\"password\" : \"" + password + "\"}";
     }
 
-    //=== login endpoint test ===//
+    //=== login test ===//
     @Test
     public void login_Success() throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders
@@ -69,7 +68,7 @@ public class UserControllerTest {
         System.out.println(result.getResponse().getContentAsString());
     }
 
-    //=== signup endpoint test ===//
+    //=== signup test ===//
     @Test
     public void signup_Success() throws Exception {
         RequestBuilder requestBuilder = MockMvcRequestBuilders
@@ -88,10 +87,5 @@ public class UserControllerTest {
 
         System.out.println(result.getResponse().getContentAsString());
     }
-
-
-
-
-
 
 }
