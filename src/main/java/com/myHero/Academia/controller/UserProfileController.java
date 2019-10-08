@@ -14,6 +14,12 @@ public class UserProfileController {
     @Autowired
     UserProfileService userProfileService;
 
+    //===testing purposes===//
+    @Autowired
+    public void setUserProfileService(UserProfileService userProfileService){
+        this.userProfileService = userProfileService;
+    }
+
     //=== parameter username & parameter newProfile & return===//
     @PostMapping("/{username}")
     public UserProfile createUserProfile(@PathVariable String username, @RequestBody UserProfile userProfile) {
