@@ -26,9 +26,9 @@ public class UserProfileServiceTest {
         UserProfile userProfile = new UserProfile();
         userProfile.setSecondary_email("iAmBetterThanJean@Ruler.com");
 
-//        UserProfile newProfile = userProfileController.createUserProfile(userProfile); // meant to pass
+        UserProfile newProfile = userProfileController.createUserProfile(userProfile); // meant to pass
 
-        UserProfile newProfile = userProfileController.createUserProfile(null); //meant to fail
+//        UserProfile newProfile = userProfileController.createUserProfile(null); //meant to fail
 
         System.out.println(newProfile);
         Assert.assertNotNull(newProfile);

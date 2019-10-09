@@ -20,7 +20,7 @@ public class UserProfileControllerTest {
 
 
     @Before
-    public void initializePUserProfileController() {
+    public void initializeUserProfileController() {
          userProfileController = new UserProfileController();
          userProfileController.setUserProfileService(new UserProfileServiceStub());
     }
