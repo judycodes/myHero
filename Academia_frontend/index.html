@@ -15,7 +15,60 @@
   <body>
 
     <main>
+      <div class="flex" id="signUpDiv">
 
+                <button id="signUpBtn" class="btn">register</button>
+
+                <form id="signUpForm" class="flex none" method="post" >
+                  <h1 class="small-caps formDirections">Create An Account</h1>
+
+                  <div class="userNameDiv formInputDiv flex">
+                    <label for="signUp-userName"><i class="fa fa-user"></i>
+                    <input type="text" id="signUp-userName" class="userName" name="userName"
+                    placeholder="username"/>
+                     </label>
+                  </div>
+
+                  <div class="pwDiv formInputDiv flex">
+                    <label for="signUp-pw"><i class="fa fa-key"></i>
+                    <input type="password" id="signUp-pw" class="password" name="password"
+                    placeholder="password"/>
+                    </label>
+                  </div>
+
+                  <div class="emailDiv formInputDiv flex">
+                    <label for="signUp-email"><i class="fa fa-envelope"></i>
+                    <input type="text" id="signUp-email" class="email" name="email" placeholder="email"/>
+                    </label>
+                  </div>
+
+                  <button type="submit" class="signUpSubmit submit  btn">submit</button>
+                </form>
+              </div>
+
+              <div class="flex" id="logInDiv">
+
+                <button id="logInBtn" class="btn">log in</button>
+
+                <form id="logInForm" class="flex none" method="post" onsubmit="checkInputs(e)">
+                  <h1 class="small-caps formDirections">Welcome Back!</h1>
+
+                  <div class="formInputDiv flex">
+                    <label for="logIn-userName"><i class="fa fa-user">
+                    <input type="text" id="logIn-userName" class="logInUserName" name="userName" placeholder="username"/>
+                    </label>
+                  </div>
+
+                  <div class="pwDiv formInputDiv flex">
+                    <label for="logIn-pw"><i class="fa fa-key"></i>
+                    <input type="password" id="logIn-pw" class="logInPassword" name="password"
+                    placeholder="password"/>
+                    </label>
+                  </div>
+
+                  <button type="submit" class="logInSubmit submit  btn">submit</button>
+                </form>
+              </div>
     </main>
 
     <footer>
