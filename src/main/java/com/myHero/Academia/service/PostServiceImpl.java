@@ -59,13 +59,11 @@ public class PostServiceImpl implements PostService {
             return HttpStatus.BAD_REQUEST;
         }
 
-
-
     }
 
     @Override
     public Post getSpecificPost(long post_id) {
-        return postRepository.findPostById(post_id);
+        return postRepository.findById(post_id).get();
     }
 
     @Override

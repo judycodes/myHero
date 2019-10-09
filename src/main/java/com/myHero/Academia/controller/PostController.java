@@ -1,7 +1,6 @@
 package com.myHero.Academia.controller;
 
 import com.myHero.Academia.model.Post;
-import com.myHero.Academia.model.User;
 import com.myHero.Academia.repository.UserRepository;
 import com.myHero.Academia.service.PostService;
 import com.myHero.Academia.service.UserProfileService;

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user_profile_id")
+@Table(name = "user_profile")
 public class UserProfile {
     @Id
     @Column
@@ -20,7 +20,6 @@ public class UserProfile {
     @JsonIgnore
     @OneToOne(mappedBy = "userProfile", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private User user;
-
 
     public UserProfile() {
     }
@@ -49,6 +48,7 @@ public class UserProfile {
     public String getMobile() {
         return mobile;
     }
+
     //=== parameter mobile ===//
     public void setMobile(String mobile) {
         this.mobile = mobile;

@@ -45,11 +45,4 @@ public class UserProfileServiceImpl implements UserProfileService{
 
     }
 
-//    //===Testing stubs, parameter userService & userProfileRepository===//
-//    @Autowired
-//    public UserProfileServiceImpl(UserProfileService userProfileService){
-//        this.userProfileService = userProfileService;
-//        //this.userProfileRepository = userProfileRepository;
-//    }
-
 }
