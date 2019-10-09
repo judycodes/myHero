@@ -67,7 +67,6 @@ i {
 body {
   font-size: 1em;
   line-height: 1.5;
-
   background: linear-gradient(rgba(255,255,255, 0.6), rgba(255,255,255,0.6)), url('../imgs/home/home_desktop.jpg');
   background-size: cover;
   background-repeat: no-repeat;

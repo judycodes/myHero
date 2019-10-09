@@ -93,6 +93,8 @@ logInSubmit.addEventListener('click', returningUser);
 function returningUser(e) {
     e.preventDefault();
 
+    localStorage.setItem('username', logInUserName.value);
+
     fetch('http://localhost:8181/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -123,5 +125,5 @@ function returningUser(e) {
 function redirectHome() {
     if (token != null) {
     window.location.href = "./home.html";
-    }
+    } 
   };
