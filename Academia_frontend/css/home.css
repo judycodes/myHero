@@ -1,0 +1,164 @@
+/*===GLOBAL===*/
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/*===TEXT===*/
+h1, h2, h3 {
+  font-family: 'Inknut Antiqua', serif;
+  font-variant: small-caps;
+  color: #0e367c;
+}
+
+h1{
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.8em;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+p, a, label, ::placeholder {
+  font-family: 'Abel', sans-serif;
+  font-size: 1.25em;
+  color: #0e367c;
+  margin: 3px;
+  padding: 3px;
+}
+
+/*===LINKS and LISTS===*/
+a {
+  text-decoration: none;
+  font-variant: small-caps;
+}
+
+a:hover {
+  color: #f44242;
+  border-bottom: 1px dotted #f44242;
+}
+
+li {
+  list-style: none;
+}
+
+/*===BUTTONS===*/
+button {
+  font-family: 'Abel', sans-serif;
+  font-size: 0.9em;
+  border-radius: 5px;
+}
+
+button:hover {
+  color: #fba257;
+}
+
+/*===IMAGES===*/
+i {
+  font-size: 2.5em;
+}
+
+/*===BODY===*/
+body {
+  font-size: 1em;
+  line-height: 1.5;
+
+  background: linear-gradient(rgba(255,255,255, 0.6), rgba(255,255,255,0.6)), url('../imgs/home/home_desktop.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+  background-attachment: fixed;
+  background-position: top right;
+}
+
+/*===HEADER===*/
+header {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+
+}
+
+/*===MAIN===*/
+.sectionHeadline {
+  margin: 3px;
+  padding: 3px 20px;
+  border-bottom: 3px double #0e367c;
+  font-variant: small-caps;
+  color: #0e367c;
+  text-shadow: 0.5px 0px #f44242;
+}
+
+/*===POST SECTION===*/
+#postsSection {
+  display: flex;
+  justify-content: space-around;
+  align-items: baseline;
+}
+
+#postsDisplay {
+  flex-grow: 2;
+}
+
+/*===COMMENT SECTION===*/
+
+/*===FORMS===*/
+/*==createNewPostSection===*/
+#createNewPostSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px;
+  flex-grow: 1;
+}
+
+#createPostForm {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#createPostBtn {
+  padding: 5px;
+}
+
+label {
+  display:flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-shadow: 0.5px 0px #f44242;
+}
+
+input, textarea {
+  font-family: 'Abel', sans-serif;
+  font-size: 0.8em;
+  padding: 5px;
+  width: 250px;
+}
+
+textarea {
+  height: 280px;
+}
+
+/*===FOOTER===*/
+footer {
+  width: 100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.media-links {
+  width: 100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
