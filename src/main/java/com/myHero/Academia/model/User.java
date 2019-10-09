@@ -20,13 +20,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String username;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
-    @Column
+    @Column(nullable = false)
     private String password;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -38,7 +38,6 @@ public class User {
 
     //=== parameter userProfile ===//
     public void setUserProfile(UserProfile userProfile) {this.userProfile = userProfile;}
-
 
     //=== empty constructor ===//
     public User() {}

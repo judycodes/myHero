@@ -40,8 +40,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //authentication states that anything inside of it such as user or profile if you put / then anything afterwards needs authentication
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/signup/**", "/login/**").permitAll()
-                .antMatchers("/user/**", "/profile/**", "/post/**", "/comment/**").authenticated()
+                .antMatchers("/signup/**", "/login/**")
+                .permitAll()
+                .antMatchers("/user/**", "/profile/**", "/post/**", "/comment/**")
+                .authenticated()
                 .and()
                 .httpBasic();
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);

@@ -1,5 +1,6 @@
 package com.myHero.Academia.service;
 
+import com.myHero.Academia.controller.SecurityController;
 import com.myHero.Academia.model.Comment;
 import com.myHero.Academia.model.Post;
 import com.myHero.Academia.model.User;
@@ -27,12 +28,17 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     PostRepository postRepository;
 
+    @Autowired
+    SecurityController securityController;
+
     @Override
-    public Comment createComment(Comment newComment, String username, long post_id) {
-        User user = userRepository.findByUsername(username);
-        Post post = postRepository.findPostById(post_id);
-        newComment.setPost(post);
+    public Comment createComment(Comment newComment, long post_id) {
+        User user = userRepository.findByUsername(securityController.getCurrentUserName());
         newComment.setUser(user);
+
+        Post post = postRepository.findById(post_id).get();
+        newComment.setPost(post);
+
         return commentRepository.save(newComment);
     }
 
@@ -42,12 +48,17 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Iterable<Comment> listAllPostComments(long post_id) {return commentRepository.findAll();}
-
-    @Override
     public HttpStatus deleteSpecificComment(long comment_id) {
-        commentRepository.deleteById(comment_id);
-        return HttpStatus.valueOf(200);
+        //username of current user attempting to delete comment
+        String currentUsername = securityController.getCurrentUserName();
+
+        if(commentRepository.findCommentById(comment_id).getUser().getUsername().equals(currentUsername)) {
+            commentRepository.deleteById(comment_id);
+            return HttpStatus.valueOf(200);
+        } else {
+            return HttpStatus.BAD_REQUEST;
+        }
+
     }
 
     @Override
@@ -56,16 +67,10 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public List<Comment> listUserComments(String username) {
+    public List<Comment> listUserComments() {
 
-        User user = userRepository.findByUsername(username);
+        User user = userRepository.findByUsername(securityController.getCurrentUserName());
 
         return commentRepository.findCommentsByUser(user); }
-
-
-//     @Override
-//    public List<Comment> listPostComments(Post post) {
-//        Post post = postRepository.findPostsByUser()
-//     }
 
 }

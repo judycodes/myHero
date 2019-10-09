@@ -15,9 +15,9 @@ public class CommentController {
     @Autowired
     CommentService commentService;
 
-    @PostMapping("{username}/createOn{post_id}")
-    public Comment createComment(@PathVariable String username,  @PathVariable long post_id, @RequestBody Comment newComment) {
-        return commentService.createComment(newComment, username, post_id); }
+    @PostMapping("/createOn{post_id}")
+    public Comment createComment(@PathVariable long post_id, @RequestBody Comment newComment) {
+        return commentService.createComment(newComment, post_id); }
 
     @GetMapping("/listAllComments")
     public Iterable<Comment> listAllComments() {
@@ -34,14 +34,9 @@ public class CommentController {
         return commentService.getSpecificComment(comment_id);
     }
 
-    @GetMapping("/listAllPostComments/{post_id}")
-    public Iterable<Comment> listAllPostComments(@PathVariable long post_id) {
-        return commentService.listAllPostComments(post_id);
-    }
-
-    @GetMapping("/get{username}Comments")
-    public List<Comment> listUserComment(@PathVariable String username) {
-        return commentService.listUserComments(username);
+    @GetMapping("/listUserComments")
+    public List<Comment> listUserComments() {
+        return commentService.listUserComments();
     }
 
 }
