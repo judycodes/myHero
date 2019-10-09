@@ -1,10 +1,8 @@
 package com.myHero.Academia.service;
 
 import com.myHero.Academia.controller.SecurityController;
-import com.myHero.Academia.model.Comment;
 import com.myHero.Academia.model.Post;
 import com.myHero.Academia.model.User;
-import com.myHero.Academia.repository.CommentRepository;
 import com.myHero.Academia.repository.PostRepository;
 import com.myHero.Academia.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,14 +24,7 @@ public class PostServiceImpl implements PostService {
     UserRepository userRepository;
 
     @Autowired
-    CommentService commentService;
-
-    @Autowired
     SecurityController securityController;
-
-    @Autowired
-    CommentRepository commentRepository;
-
 
     @Override
     public Post createPost(Post newPost) {

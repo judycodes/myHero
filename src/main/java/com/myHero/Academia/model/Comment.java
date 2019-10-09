@@ -2,7 +2,6 @@ package com.myHero.Academia.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import javafx.geometry.Pos;
 
 import javax.persistence.*;
 
@@ -39,7 +38,6 @@ public class Comment {
     public Post getPost() {return post;}
 
     public void setPost(Post post) {this.post = post;}
-
 
     //=== empty constructor ===//
     public Comment() {}
