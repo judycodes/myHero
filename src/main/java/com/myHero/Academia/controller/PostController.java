@@ -3,6 +3,7 @@ package com.myHero.Academia.controller;
 import com.myHero.Academia.model.Post;
 import com.myHero.Academia.repository.UserRepository;
 import com.myHero.Academia.service.PostService;
+import com.myHero.Academia.service.UserProfileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,12 @@ public class PostController {
 
     @Autowired
     UserRepository userRepository;
+
+    //===testing purposes===//
+    @Autowired
+    public void setPostService(PostService postService){
+        this.postService = postService;
+    }
 
     @PostMapping("/create")
     public Post createPost(@RequestBody Post newPost) {
