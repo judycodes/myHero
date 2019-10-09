@@ -1,7 +1,6 @@
 package com.myHero.Academia.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -62,7 +61,6 @@ public class Post {
     public void setPost_body(String post_body) {
         this.post_body = post_body;
     }
-
 
     public User getUser() { return user; }
 

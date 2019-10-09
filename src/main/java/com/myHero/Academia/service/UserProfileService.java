@@ -1,7 +1,6 @@
 package com.myHero.Academia.service;
-import com.myHero.Academia.model.UserProfile;
 
-import java.security.PublicKey;
+import com.myHero.Academia.model.UserProfile;
 
 public interface UserProfileService {
 

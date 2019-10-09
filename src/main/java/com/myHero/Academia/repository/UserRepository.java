@@ -12,12 +12,4 @@ public interface UserRepository extends CrudRepository<User, Long> {
     public User login(String username, String password);
     public User findByUsername(String username);
 
-
-    // ===remember to implement log in with email ===\\
-//
-//    @Query("From User u Where u.email =?1 And u.password = ?2")
-//    public User loginEmail(String email, String password);
-//
-//
-//    public User findByEmail(String email);
 }

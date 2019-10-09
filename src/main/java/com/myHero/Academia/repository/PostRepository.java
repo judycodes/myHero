@@ -21,6 +21,5 @@ public interface PostRepository extends CrudRepository<Post, Long> {
 //    public List<Post> findPostsByUserId (long user_id);
 
 //find user's posts by user object/ username
-    //@Query(" {'user' : ?0} ")
     public List<Post> findPostsByUser(User user);
 }

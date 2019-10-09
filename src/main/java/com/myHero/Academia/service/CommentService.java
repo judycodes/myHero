@@ -1,9 +1,7 @@
 package com.myHero.Academia.service;
 
 import com.myHero.Academia.model.Comment;
-import com.myHero.Academia.model.User;
 import org.springframework.http.HttpStatus;
-
 import java.util.List;
 
 public interface CommentService {

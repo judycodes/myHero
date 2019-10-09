@@ -1,6 +1,5 @@
 package com.myHero.Academia.service;
 
-import com.myHero.Academia.model.Post;
 import com.myHero.Academia.model.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
