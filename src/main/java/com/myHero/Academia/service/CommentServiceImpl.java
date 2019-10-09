@@ -48,9 +48,6 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Iterable<Comment> listAllPostComments(long post_id) {return commentRepository.findAll();}
-
-    @Override
     public HttpStatus deleteSpecificComment(long comment_id) {
         //username of current user attempting to delete comment
         String currentUsername = securityController.getCurrentUserName();

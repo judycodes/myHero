@@ -58,9 +58,7 @@ public class PostServiceImpl implements PostService {
         }else{
             return HttpStatus.BAD_REQUEST;
         }
-
-
-
+        
     }
 
     @Override

@@ -14,8 +14,6 @@ public interface CommentService {
     //=== return all comments ===//
     public Iterable<Comment> listAllComments();
 
-    public Iterable<Comment> listAllPostComments(long post_id);
-
     //=== parameter comment_id & return OK message ===//
     public HttpStatus deleteSpecificComment(long comment_id);
 
@@ -23,7 +21,5 @@ public interface CommentService {
     public Comment getSpecificComment(long comment_id);
 
     public List<Comment> listUserComments();
-
-//    public List<Comment> listPostComments(Post post);
 
 }
