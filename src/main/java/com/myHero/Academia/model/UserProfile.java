@@ -17,12 +17,11 @@ public class UserProfile {
     @Column
     private String secondary_email;
 
-    @JsonIgnore
+    //@JsonIgnore
     @OneToOne(mappedBy = "userProfile", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private User user;
 
-    public UserProfile() {
-    }
+    public UserProfile() {}
 
     // ===return user ===//
     public User getUser() {

@@ -133,3 +133,6 @@ function deletePost(postId) {
       console.log(error);
     })
 }
+
+
+//comments

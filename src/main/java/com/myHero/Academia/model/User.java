@@ -32,14 +32,14 @@ public class User {
     @JoinColumn(name = "profile_id")
     private UserProfile userProfile;
 
+    //=== empty constructor ===//
+    public User() {}
+
     //=== return userProfile ===//
     public UserProfile getUserProfile() {return userProfile;}
 
     //=== parameter userProfile ===//
     public void setUserProfile(UserProfile userProfile) {this.userProfile = userProfile;}
-
-    //=== empty constructor ===//
-    public User() {}
 
     //=== return Id ===//
     public Long getId() {return id;}
@@ -64,5 +64,7 @@ public class User {
 
     //=== parameter Email===//
     public void setEmail(String email) {this.email = email;}
+
+
 
 }

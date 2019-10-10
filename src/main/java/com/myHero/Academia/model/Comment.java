@@ -26,18 +26,10 @@ public class Comment {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public User getUser(){return user;}
-
-    public void setUser(User user) {this.user = user;}
-
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST,
     CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "post_id")
     private Post post;
-
-    public Post getPost() {return post;}
-
-    public void setPost(Post post) {this.post = post;}
 
     //=== empty constructor ===//
     public Comment() {}
@@ -54,6 +46,13 @@ public class Comment {
     //=== parameter comment_body ===//
     public void setComment_body(String comment_body) { this.comment_body = comment_body; }
 
+    public Post getPost() {return post;}
+
+    public void setPost(Post post) {this.post = post;}
+
+    public User getUser(){return user;}
+
+    public void setUser(User user) {this.user = user;}
 }
 
 
