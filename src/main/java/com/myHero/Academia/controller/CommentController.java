@@ -3,7 +3,6 @@ package com.myHero.Academia.controller;
 import com.myHero.Academia.model.Comment;
 import com.myHero.Academia.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

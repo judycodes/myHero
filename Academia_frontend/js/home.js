@@ -1,6 +1,8 @@
 //===HOME===//
 
 //*===POSTS===*//
+
+//LIST ALL POSTS
 listAllPosts();
 
 function listAllPosts () {
@@ -57,8 +59,6 @@ function listAllPosts () {
       })
       });
 
-
-
   //adds post content to created post title and post body elements
   postTitle.innerText = res[i].post_title;
   postBody.innerText = res[i].post_body;
@@ -89,4 +89,38 @@ function listAllPosts () {
   .catch((err) => {
   console.log(err);
   })
+}
+
+//CREATE POST
+//new post button
+const createPostBtn = document.querySelector('#createPostBtn');
+createPostBtn.addEventListener('click', createPost);
+
+//create posts
+function createPost(e) {
+    e.preventDefault();
+
+    const newPostTitle = document.querySelector('#newPostTitle');
+    const newPostBody = document.querySelector('#newPostBody');
+
+    fetch("http://localhost:8181/post/create", {
+        method: 'POST',
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem('user'),
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            post_title: newPostTitle.value,
+            post_body: newPostBody.value
+        })
+    })
+
+    //add new post to dom by forcing page to refresh, which would call listAllPosts again
+    .then((res) => {
+        window.location.reload(true);
+    })
+
+    .catch((err) => {
+        console.log(err);
+    })
 }
