@@ -24,7 +24,7 @@ function listAllPosts () {
   const postsDisplay = document.querySelector('#postsDisplay');
 
   //loop through post response
-  for(let i = 0; i < res.length; i++) {
+  for(let i = res.length-1; i > 0; i--) {
 
   //create post related elements
   const postDiv = document.createElement('div');

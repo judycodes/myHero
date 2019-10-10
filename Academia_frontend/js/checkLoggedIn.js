@@ -9,7 +9,7 @@ function checkLogin() {
     const navBar = document.querySelector('nav');
     const navItem = navBar.lastElementChild;
     navItem.innerText = "\"YOUNG " + localStorage.getItem('username').toUpperCase() + "\"";
-    navItem.href = "home.html";
+    navItem.href = "profile.html";
 
     const logout = document.createElement('a');
     logout.href = "#";
