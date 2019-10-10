@@ -1,10 +1,12 @@
+console.log("js is linked")
 
-//===ACCOUNT/PROFILE===//
-//create profile form variables
-let addEmail = document.getElementById('addEmail');
+//TOKEN;
+let token;
+
+//Profile FORM VARIABLES
 let secondEmail = document.getElementById('update-secondEmail')
 let mobile = document.getElementById('update-mobile');
-let addy = document.getElementById('addy');
+let heroName = document.getElementById('Hero-name');
 //display profile variables
 const displayUserName = document.getElementById('displayUserName');
 const displayPrimaryEmail = document.getElementById('displayPrimaryEmail');
