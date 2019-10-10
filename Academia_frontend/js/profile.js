@@ -4,10 +4,11 @@ console.log("js is linked")
 let token;
 
 //Profile FORM VARIABLES
-let email = document.getElementById('update-email')
-let secondEmail = document.getElementById('update-secondEmail')
+let email = document.getElementById('update-email');
+let secondEmail = document.getElementById('update-secondEmail');
 let mobile = document.getElementById('update-mobile');
 let heroName = document.getElementById('Hero-name');
+let catchPhrase = document.getElementById('update-catchPhrase')
 //display profile variables
 const displayUserName = document.getElementById('username');
 const displayPrimaryEmail = document.getElementById('primaryEmail');
