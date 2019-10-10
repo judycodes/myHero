@@ -7,6 +7,7 @@ import com.myHero.Academia.repository.PostRepository;
 import com.myHero.Academia.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,14 +41,14 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public HttpStatus deleteSpecificPost(long post_id) {
+    public ResponseEntity deleteSpecificPost(long post_id) {
         String currentUsername = securityController.getCurrentUserName();
 
         if(postRepository.findPostById(post_id).getUser().getUsername().equals(currentUsername)){
             postRepository.deleteById(post_id);
-            return HttpStatus.valueOf(200);
+            return new ResponseEntity(HttpStatus.valueOf(200));
         }else{
-            return HttpStatus.BAD_REQUEST;
+            return new ResponseEntity(HttpStatus.valueOf(204));
         }
 
     }
