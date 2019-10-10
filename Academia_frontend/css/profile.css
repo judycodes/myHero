@@ -19,13 +19,7 @@ main {
   display: flex;
 }
 
-h2 {
-  font-size: 1.8em;
-}
-h3 {
-  font-size: 1.5em;
-}
-
+/*===for p, a, label===*/
 p, a, label, ::placeholder {
   font-family: 'Abel', sans-serif;
   font-size: 1.25em;
@@ -54,7 +48,6 @@ nav {
   font-size: 45px;
 }
 
-
 /*===BUTTONS===*/
 button {
   font-family: 'Abel', sans-serif;
@@ -65,11 +58,6 @@ button {
   padding: 5px;
   color: #0e367c;
   margin-left: 95px;
-}
-
-/* Main */
-main {
-
 }
 
 /*===IMAGES===*/
@@ -89,7 +77,6 @@ body {
   background-attachment: fixed;
   }
 
-
 /*===HEADER===*/
 header {
   display: flex;
@@ -108,14 +95,6 @@ header {
 }
 
 /*===FORMS===*/
-label {
-  display:flex;
-  justify-content: space-around;
-  /* flex-direction: column; */
-  align-items: flex-start;
-  color: #0e367c;
-  text-shadow: 0.5px 0px #f44242;
-}
 
 form {
   margin-top: 10px;
@@ -126,23 +105,32 @@ form {
   padding: 15px;
 }
 
+/*===Left Form===*/
 #profile-form {
   padding-right: 30px;
 }
 
-#left {
-  margin-left: 75px;
-}
-
+/*===Right Form===*/
 #profile-results{
   margin-left: 425px;
   padding-right: 30px;
 }
 
-#right {
-  padding-left: 500px;
+/*===Affects the h1 left form */
+#left {
+  margin-left: 75px;
 }
 
+/*===label===*/
+label {
+  display:flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  color: #0e367c;
+  text-shadow: 0.5px 0px #f44242;
+}
+
+/*===input===*/
 input {
   font-family: 'Abel', sans-serif;
   font-size: 0.8em;
@@ -163,6 +151,7 @@ footer {
   padding: 20px;
 }
 
+/*===media-links===*/
 .media-links {
   width: 100%;
   display:flex;

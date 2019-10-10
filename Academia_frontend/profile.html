@@ -4,18 +4,20 @@
     <meta charset="utf-8">
     <title>MHA PROFILE</title>
 
-    <!--Google Fonts-->
+<!--Google Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Abel%7CInknut+Antiqua&display=swap" rel="stylesheet">
 
-    <!--FONT AWESOME CDN-->
+<!--FONT AWESOME CDN-->
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
-    <!--External Stylesheet - PROFILE -->
+<!--External Stylesheet - PROFILE -->
     <link rel="stylesheet" type="text/css" href="css/profile.css">
 
   </head>
 
   <body>
+
+<!--Nav-->
     <header>
       <nav>
         <a href="./home.html" class="nav-link" id="home-link">HOME</a>
@@ -23,17 +25,20 @@
         <a href="./profile.html" class="nav-link" id="profile-link">PROFILE</a>
       </nav>
     </header>
-    <main>
 
+<!-- main -->
+  <main>
+    <div>
 
+<!-- Form on he left side-->
+      <form id="profile-form">
 
-<div>
-    <!-- SHould have secondary-email, and model -->
-    <form id="profile-form">
-      <div id="left">
-        <h1>Profile</h1>
-      </div>
-      
+<!-- h1 for the left form -->
+        <div id="left">
+          <h1>Profile</h1>
+        </div>
+
+<!--Second-email-->
       <div id="second-email" class="flex">
         <label for="2email"><i class ="fa fa-envelope"></i>
           <input type ="text" id="update-secondEmail" name="secondEmail"
@@ -41,6 +46,7 @@
         </label>
       </div>
 
+<!--mobile-->
       <div id="mobile" class="flex">
         <label for="mbile"><i class ="fa fa-key"></i>
           <input type="text" id="update-mobile" name="mphone"
@@ -48,6 +54,7 @@
         </label>
       </div>
 
+<!--Heroname-->
       <div id="HeroName" class="flex">
         <label for="Hname"><i class ="fa fa-key"></i>
           <input type="text" id="Hero-name" name="hname"
@@ -55,6 +62,7 @@
         </label>
       </div>
 
+<!-- Catchphrae -->
       <div id="CatchPhrase" class ="flex">
         <label for="Cphrase"><i class="fa fa-key"></i>
           <input type ="text" id="Catch-Phrase" name="cPhrase"
@@ -62,18 +70,22 @@
         </label>
       </div>
 
-            <button id="update-profile">Update</button>
-          </div>
-</form>
-
-  <form id="profile-results">
-    <div>
-      <h1>Your Profile!</h1>
+<!-- button -->
+      <button id="update-profile">Update</button>
     </div>
   </form>
 
-    </main>
+<!-- Form for the right side  -->
+  <form id="profile-results">
 
+<!--h1 for the right form -->
+    <div id="right">
+      <h1>Your Profile!</h1>
+    </div>
+  </form>
+</main>
+
+<!--Footer for the right  -->
     <footer>
       <ul class="media-links">
         <li><a href="https://www.facebook.com/MyHeroAcademia/" target="_blank" class="media-link"><i class="fa fa-facebook-square"></i></a></li>
@@ -82,6 +94,8 @@
       </ul>
     </footer>
 
-  </body>
+<!-- Connect to the js -->
+      <script src="./js/profile.js"></script>
 
+  </body>
 </html>
