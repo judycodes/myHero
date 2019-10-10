@@ -50,7 +50,7 @@ function listAllPosts () {
       if (res.status == 200) {
         window.location.reload(true);
         alert("Post Was Defeated!");
-      } else if (res.status == 204){
+      } else if (res.status == 405){
         alert("This Is Not Your Post To Fight. (Mind your own posts!)");
       }
       })

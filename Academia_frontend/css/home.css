@@ -112,7 +112,7 @@ header {
 
 /*===MAIN===*/
 .sectionHeadline {
-  margin: 3px;
+  margin: 3px 0px 5px;
   padding: 3px 20px;
   border-bottom: 3px double #0e367c;
   font-variant: small-caps;

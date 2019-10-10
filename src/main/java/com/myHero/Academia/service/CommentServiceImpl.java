@@ -57,7 +57,7 @@ public class CommentServiceImpl implements CommentService {
             commentRepository.deleteById(comment_id);
             return new ResponseEntity(HttpStatus.valueOf(200));
         } else {
-            return new ResponseEntity(HttpStatus.valueOf(204));
+            return new ResponseEntity(HttpStatus.valueOf(405));
         }
 
     }
