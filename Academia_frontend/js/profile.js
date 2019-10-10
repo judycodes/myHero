@@ -1,5 +1,4 @@
-
-//===ACCOUNT/PROFILE===//
+//===PROFILE===//
 //create profile form variables
 let addEmail = document.getElementById('addEmail');
 let secondEmail = document.getElementById('update-secondEmail')

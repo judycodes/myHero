@@ -9,6 +9,7 @@ import com.myHero.Academia.repository.PostRepository;
 import com.myHero.Academia.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -48,15 +49,15 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public HttpStatus deleteSpecificComment(long comment_id) {
+    public ResponseEntity deleteSpecificComment(long comment_id) {
         //username of current user attempting to delete comment
         String currentUsername = securityController.getCurrentUserName();
 
         if(commentRepository.findCommentById(comment_id).getUser().getUsername().equals(currentUsername)) {
             commentRepository.deleteById(comment_id);
-            return HttpStatus.valueOf(200);
+            return new ResponseEntity(HttpStatus.valueOf(200));
         } else {
-            return HttpStatus.BAD_REQUEST;
+            return new ResponseEntity(HttpStatus.valueOf(405));
         }
 
     }

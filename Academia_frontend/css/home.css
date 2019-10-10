@@ -32,6 +32,16 @@ p, a, label, ::placeholder {
   padding: 3px;
 }
 
+/* must also add classname to post title  */
+/* later change to classname to represent post and comment author spans */
+span {
+  font-family: 'Abel', sans-serif;
+  font-size: 0.7em;
+  color: #0e367c;
+  margin-left: 20px;
+  font-variant: small-caps;
+}
+
 /*===LINKS and LISTS===*/
 a {
   text-decoration: none;
@@ -47,11 +57,17 @@ li {
   list-style: none;
 }
 
+nav {
+  margin-top: 10px;
+}
+
 /*===BUTTONS===*/
 button {
   font-family: 'Abel', sans-serif;
   font-size: 0.9em;
   border-radius: 5px;
+  font-variant: small-caps;
+  padding: 8px;
 }
 
 button:hover {
@@ -64,10 +80,9 @@ i {
 }
 
 /*===BODY===*/
-body {
-  font-size: 1em;
+body, html {
+  font-size: 16px;
   line-height: 1.5;
-
   background: linear-gradient(rgba(255,255,255, 0.6), rgba(255,255,255,0.6)), url('../imgs/home/home_desktop.jpg');
   background-size: cover;
   background-repeat: no-repeat;
@@ -80,14 +95,24 @@ body {
 /*===HEADER===*/
 header {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   padding: 10px;
+  margin-bottom: 5px;
+}
 
+#mha {
+  font-size: 2.5em;
+  margin-bottom: 5px;
+  padding: 20px 80px 5px;
+  border-bottom: 5px double #f44242;
+  text-shadow: 1px 2px #fba257;
 }
 
 /*===MAIN===*/
 .sectionHeadline {
-  margin: 3px;
+  margin: 3px 0px 5px;
   padding: 3px 20px;
   border-bottom: 3px double #0e367c;
   font-variant: small-caps;
@@ -96,6 +121,10 @@ header {
 }
 
 /*===POST SECTION===*/
+#latestPostsHeadline {
+  margin-right: 500px;
+}
+
 #postsSection {
   display: flex;
   justify-content: space-around;
@@ -105,6 +134,11 @@ header {
 #postsDisplay {
   flex-grow: 2;
 }
+
+/* individual post styling
+.post {
+  margin-right: 50px;
+} */
 
 /*===COMMENT SECTION===*/
 
