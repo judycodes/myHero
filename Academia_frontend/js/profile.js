@@ -1,9 +1,15 @@
+<<<<<<< HEAD
 console.log("js is linked")
 
 //TOKEN;
 let token;
 
 //Profile FORM VARIABLES
+=======
+//===PROFILE===//
+//create profile form variables
+let addEmail = document.getElementById('addEmail');
+>>>>>>> e30e7be3f277603f2cbef6a44ea1d8a91b37b5e6
 let secondEmail = document.getElementById('update-secondEmail')
 let mobile = document.getElementById('update-mobile');
 let heroName = document.getElementById('Hero-name');

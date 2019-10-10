@@ -3,7 +3,7 @@ package com.myHero.Academia.controller;
 import com.myHero.Academia.model.Comment;
 import com.myHero.Academia.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,7 +25,7 @@ public class CommentController {
     }
 
     @DeleteMapping("/delete-{comment_id}")
-    public HttpStatus deleteSpecificComment(@PathVariable long comment_id) {
+    public ResponseEntity deleteSpecificComment(@PathVariable long comment_id) {
         return commentService.deleteSpecificComment(comment_id);
     }
 

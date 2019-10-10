@@ -1,7 +1,7 @@
 package com.myHero.Academia.service;
 
 import com.myHero.Academia.model.Post;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public class PostServiceStub implements PostService {
     }
 
     @Override
-    public HttpStatus deleteSpecificPost(long post_id) {
+    public ResponseEntity deleteSpecificPost(long post_id) {
         return null;
     }
 

@@ -5,6 +5,7 @@ import com.myHero.Academia.repository.UserRepository;
 import com.myHero.Academia.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class PostController {
     }
 
     @DeleteMapping("/delete-{post_id}")
-    public HttpStatus deleteSpecificPost(@PathVariable long post_id) {
+    public ResponseEntity deleteSpecificPost(@PathVariable long post_id) {
         return postService.deleteSpecificPost(post_id);
     }
 
