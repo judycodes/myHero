@@ -65,11 +65,4 @@ public class User {
     //=== parameter Email===//
     public void setEmail(String email) {this.email = email;}
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Post> posts;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Comment> comments;
-
-
 }

@@ -29,6 +29,9 @@ public class Post {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
     //=== empty constructor ===//
     public Post() {}
 
@@ -65,9 +68,6 @@ public class Post {
     public User getUser() { return user; }
 
     public void setUser(User user) { this.user = user; }
-
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<Comment> comments;
 
     public List<Comment> getComments() {return comments;}
 

@@ -24,7 +24,9 @@ function listAllPosts () {
   const postsDisplay = document.querySelector('#postsDisplay');
 
   //loop through post response
-  for(let i = res.length-1; i > 0; i--) {
+  for(let i = res.length-1; i >= 0; i--) {
+
+    const postId = res[i].id;
 
   //create post related elements
   const postDiv = document.createElement('div');
@@ -37,33 +39,16 @@ function listAllPosts () {
   deletePostBtn.innerText = "delete post";
 
   //delete post addEventListener
-  deletePostBtn.addEventListener("click", function() {
-    fetch((`http://localhost:8181/post/delete-${res[i].id}`), {
-      method: 'DELETE',
-      headers: {
-        "Authorization": "Bearer " + localStorage.getItem('user'),
-        "Content-Type": "application/json"
-      }
-    })
-    .then((res) => {
-      console.log(res, "res in delete post");
-      if (res.status == 200) {
-        window.location.reload(true);
-        alert("Post Was Defeated!");
-      } else if (res.status == 405){
-        alert("This Is Not Your Post To Fight. (Mind your own posts!)");
-      }
-      })
-      .then((error) => {
-        console.log(error);
-      })
-      });
+  deletePostBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+    deletePost(postId);
+    });
 
   //adds post content to created post title and post body elements
   postTitle.innerText = res[i].post_title;
   postBody.innerText = res[i].post_body;
 
-  postAuthor.innerText = `|| author: ${res[i].user.username}`
+  postAuthor.innerText = `|| author: ${res[i].user.username}`;
 
   //create comment related elements
   const commentDiv = document.createElement('div');
@@ -122,5 +107,29 @@ function createPost(e) {
 
     .catch((err) => {
         console.log(err);
+    })
+}
+
+//DELETE POST
+function deletePost(postId) {
+
+  fetch((`http://localhost:8181/post/delete-${postId}`), {
+    method: 'DELETE',
+    headers: {
+      "Authorization": "Bearer " + localStorage.getItem('user'),
+      "Content-Type": "application/json"
+    }
+  })
+  .then((res) => {
+    console.log(res, "res in delete post");
+    if (res.status == 200) {
+      window.location.reload(true);
+      alert("Post Was Defeated!");
+    } else if (res.status == 405){
+      alert("This Is Not Your Post To Fight. (Mind your own posts!)");
+    }
+    })
+    .then((error) => {
+      console.log(error);
     })
 }
