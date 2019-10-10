@@ -1,21 +1,16 @@
-<<<<<<< HEAD
 console.log("js is linked")
 
 //TOKEN;
 let token;
 
 //Profile FORM VARIABLES
-=======
-//===PROFILE===//
-//create profile form variables
-let addEmail = document.getElementById('addEmail');
->>>>>>> e30e7be3f277603f2cbef6a44ea1d8a91b37b5e6
+let email = document.getElementById('update-email')
 let secondEmail = document.getElementById('update-secondEmail')
 let mobile = document.getElementById('update-mobile');
 let heroName = document.getElementById('Hero-name');
 //display profile variables
-const displayUserName = document.getElementById('displayUserName');
-const displayPrimaryEmail = document.getElementById('displayPrimaryEmail');
+const displayUserName = document.getElementById('username');
+const displayPrimaryEmail = document.getElementById('primaryEmail');
 const displayAddEmail = document.getElementById('displayAddEmail');
 const displayMobile = document.getElementById('displayMobile');
 const displayAddy = document.getElementById('displayAddy');
