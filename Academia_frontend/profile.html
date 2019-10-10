@@ -16,19 +16,62 @@
   </head>
 
   <body>
-
     <header>
       <nav>
         <a href="./home.html" class="nav-link" id="home-link">HOME</a>
-
         <a href="./about.html" class="nav-link" id="about-link">ABOUT</a>
-
         <a href="./profile.html" class="nav-link" id="profile-link">PROFILE</a>
       </nav>
     </header>
-
     <main>
-<h1>profile stuff</h1>
+
+
+
+<div>
+    <!-- SHould have secondary-email, and model -->
+    <form id="profile-form">
+      <div id="left">
+        <h1>Profile</h1>
+      </div>
+      
+      <div id="second-email" class="flex">
+        <label for="2email"><i class ="fa fa-envelope"></i>
+          <input type ="text" id="update-secondEmail" name="secondEmail"
+          placeholder="Second Email"/>
+        </label>
+      </div>
+
+      <div id="mobile" class="flex">
+        <label for="mbile"><i class ="fa fa-key"></i>
+          <input type="text" id="update-mobile" name="mphone"
+          placeholder="Mobile"/>
+        </label>
+      </div>
+
+      <div id="HeroName" class="flex">
+        <label for="Hname"><i class ="fa fa-key"></i>
+          <input type="text" id="Hero-name" name="hname"
+          placeholder="Superhero name"/>
+        </label>
+      </div>
+
+      <div id="CatchPhrase" class ="flex">
+        <label for="Cphrase"><i class="fa fa-key"></i>
+          <input type ="text" id="Catch-Phrase" name="cPhrase"
+          placeholder="Catch-Phrase"/>
+        </label>
+      </div>
+
+            <button id="update-profile">Update</button>
+          </div>
+</form>
+
+  <form id="profile-results">
+    <div>
+      <h1>Your Profile!</h1>
+    </div>
+  </form>
+
     </main>
 
     <footer>

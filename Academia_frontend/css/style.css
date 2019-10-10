@@ -1,4 +1,4 @@
-/*===GLOBAL===*/
+/* ===GLOBAL==== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,15 +6,150 @@
 }
 
 /*===TEXT===*/
+h1, h2, h3 {
+  font-family: 'Inknut Antiqua', serif;
+  font-variant: small-caps;
+  color: #0e367c;
+}
+h1{
+  font-size: 2em;
 
-/*===LINKS===*/
-
+}
+h2 {
+  font-size: 1.8em;
+}
+h3 {
+  font-size: 1.5em;
+}
+p, a, label, ::placeholder {
+  font-family: 'Abel', sans-serif;
+  font-size: 1.25em;
+  color: #0e367c;
+  margin: 3px;
+  padding: 3px;
+}
+/*===LINKS and LISTS===*/
+a {
+  text-decoration: none;
+  font-variant: small-caps;
+}
+a:hover {
+  color: #f44242;
+  border-bottom: 1px dotted #f44242;
+}
+li {
+  list-style: none;
+}
 /*===BUTTONS===*/
+button {
+  font-family: 'Abel', sans-serif;
+  font-size: 0.9em;
+  border-radius: 5px;
+  font-variant: small-caps;
+}
+button:hover {
+  color: #fba257;
+}
+
+
+#signUpBtn, #logInBtn {
+  margin-left: 70px;
+  font-size:  30px;
+  border-radius: 8px;
+  margin-top: 20px;
+  margin-bottom: 25px;
+  padding: 10px;
+}
+
+.signUpSubmit, .logInSubmit {
+  margin-left: 70px;
+  font-size: 20px;
+  padding: 5px;
+}
+
+.signUpSubmit{
+  margin-bottom: 50px;
+}
+
+
+/*===IMAGES===*/
+i {
+  font-size: 2.5em;
+}
 
 /*===BODY===*/
+body {
+  font-size: 1em;
+  line-height: 1.5;
+  background: linear-gradient(rgba(0,0,0, 0.6), rgba(255,255,255,0.6)), url('../imgs/landing/landing_desktop.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+  background-attachment: fixed;
+}
 
-/*===HEADER===*/
+#landingTitle {
+  display: flex;
+  margin: 50px;
+  justify-content: center;
+}
 
-/*===MAIN===*/
+#main {
+  width:100%;
+display: flex;
+margin: 90px;
+justify-content: center;
+justify-content: space-around;
+align-items:center;
 
-/*===FOOTER===*/
+}
+
+h1 {
+  color: white;
+  /* Add text shadow */
+}
+
+label {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+}
+
+
+form {
+  border: 3px solid #f1f1f1;
+  height: 285px;
+  width: 250px;
+  padding: 15px;
+}
+
+
+input[type=text], input[type=password] {
+    width: 220px;
+    padding: 12px 5px;
+    margin: 8px 0px 8px 10px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    font-size: 12px;
+  }
+
+  #signUpDiv {
+    margin-left: 270px;
+  }
+
+  #logInDiv {
+    margin-right: 270px;
+  }
+
+#logInUsername {
+  margin-top: 50px;
+}
+
+
+
+
+
+​
