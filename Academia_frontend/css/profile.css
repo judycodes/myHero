@@ -6,24 +6,20 @@
 }
 
 /*===TEXT===*/
-h1, h2, h3 {
+h1{
   font-family: 'Inknut Antiqua', serif;
   font-variant: small-caps;
+  font-size: 2em;
   color: #0e367c;
 }
 
-h1{
-  font-size: 2em;
+/*===Main===*/
+main {
+  margin-top: 50px;
+  display: flex;
 }
 
-h2 {
-  font-size: 1.8em;
-}
-
-h3 {
-  font-size: 1.5em;
-}
-
+/*===for p, a, label===*/
 p, a, label, ::placeholder {
   font-family: 'Abel', sans-serif;
   font-size: 1.25em;
@@ -47,15 +43,21 @@ li {
   list-style: none;
 }
 
+/*===nav===*/
+nav {
+  font-size: 45px;
+}
+
 /*===BUTTONS===*/
 button {
   font-family: 'Abel', sans-serif;
   font-size: 0.9em;
   border-radius: 5px;
-}
-
-button:hover {
-  color: #fba257;
+  font-size: 40px;
+  font-variant: small-caps;
+  padding: 5px;
+  color: #0e367c;
+  margin-left: 95px;
 }
 
 /*===IMAGES===*/
@@ -67,15 +69,13 @@ i {
 body {
   font-size: 1em;
   line-height: 1.5;
-
-  /* background: linear-gradient(rgba(255,255,255, 0.6), rgba(255,255,255,0.6)), url('../imgs/frontend/home/home_desktop.jpg'); */
+  background: linear-gradient(rgba(255,255,255, 0.2), rgba(255,255,255,0.6)), url('../imgs/profile/profile_desktop.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
   width: 100vw;
   background-attachment: fixed;
-  background-position: top right;
-}
+  }
 
 /*===HEADER===*/
 header {
@@ -95,17 +95,51 @@ header {
 }
 
 /*===FORMS===*/
+
+form {
+  margin-top: 10px;
+  margin-left: 190px;
+  border: 3px solid #0e367c;
+  height: 440px;
+  width: 350px;
+  padding: 15px;
+}
+
+/*===Left Form===*/
+#profile-form {
+  padding-right: 30px;
+}
+
+/*===Right Form===*/
+#profile-results{
+  margin-left: 425px;
+  padding-right: 30px;
+}
+
+/*===Affects the h1 left form */
+#left {
+  margin-left: 75px;
+}
+
+/*===label===*/
 label {
   display:flex;
-  flex-direction: column;
+  justify-content: space-around;
   align-items: flex-start;
+  color: #0e367c;
   text-shadow: 0.5px 0px #f44242;
 }
 
+/*===input===*/
 input {
   font-family: 'Abel', sans-serif;
   font-size: 0.8em;
-  padding: 5px;
+  padding: 12px 5px;
+  width: 275px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+  font-size: 20px;
 }
 
 /*===FOOTER===*/
@@ -117,9 +151,11 @@ footer {
   padding: 20px;
 }
 
+/*===media-links===*/
 .media-links {
   width: 100%;
   display:flex;
   justify-content: center;
   align-items: center;
+  font-size: 50px;
 }
