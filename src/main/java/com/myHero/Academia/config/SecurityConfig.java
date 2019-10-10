@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
 
 @Configuration // is an analog for XML files, which is used to configure our application with Security features
 @EnableWebSecurity // allows Spring to find configuration class and apply it to global WebSecurity
@@ -33,6 +34,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
+
 //        antMatchers() allows configuring the HttpSecurity to only be invoked when matching the provided ant pattern.
 //        csrf() stands for cross site forgery, which can steal user so we encrypt it
 //authentication states that anything inside of it such as user or profile if you put / then anything afterwards needs authentication

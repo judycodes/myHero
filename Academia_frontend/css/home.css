@@ -105,6 +105,13 @@ header {
   flex-grow: 2;
 }
 
+/* individual post styling
+.post {
+  margin-right: 50px;
+}
+
+*/
+
 /*===COMMENT SECTION===*/
 
 /*===FORMS===*/
