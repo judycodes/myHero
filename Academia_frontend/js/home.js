@@ -23,7 +23,7 @@ function listAllPosts () {
   console.log("list posts", res);
   const postsDisplay = document.querySelector('#postsDisplay');
 
-  //loop through posts in database
+  //loop through posts in database - places recent posts on top of page
   for(let i = res.length-1; i >= 0; i--) {
 
     //post id needed to delete post
@@ -31,17 +31,22 @@ function listAllPosts () {
 
   //===create post related elements===//
   const postDiv = document.createElement('div');
-  //gives postdiv an id of actual post
-  postDiv.id = `${res[i].id}`;
   const postTitle = document.createElement('h3');
   const postBody = document.createElement('p');
   const postAuthor = document.createElement('span');
+  postAuthor.classList.add("postAuthor");
+  postAuthor.setAttribute("author_id", postId);
+
+    //gives postdiv an id of actual post
+    postDiv.id = `${res[i].id}`;
 
     //adds post content to created post title and post body elements
     postTitle.innerText = res[i].post_title;
     postBody.innerText = res[i].post_body;
 
-    postAuthor.innerText = `|| author: ${res[i].user.username}`;
+    postAuthor.innerHTML = `|| author: <span class="username"></span>`;
+
+
 
   //===delete related elements===//
   const deletePostBtn = document.createElement('button');
@@ -78,11 +83,25 @@ function listAllPosts () {
     });
 
 //adds post to each postDiv element
+
+    const commentsDisplay = document.createElement('div');
+    commentsDisplay.setAttribute("id", "commentsDisplay");
+
   postTitle.append(postAuthor);
-  postDiv.append(postTitle, postBody, deletePostBtn, viewCommentsBtn, showCommentBoxBtn);
+  postDiv.append(postTitle, postBody, deletePostBtn, viewCommentsBtn, showCommentBoxBtn, commentsDisplay);
 
 //adds all posts to postsDisplay
   postsDisplay.appendChild(postDiv);
+
+
+  if(res[i].user.id){
+    userLookup(res[i].user.id, postId);
+
+
+    } else {
+    userLookup(res[i].user, postId);
+
+  }
 
   }
   })
@@ -169,7 +188,10 @@ function viewComments(event) {
     //console.log(res.comments, "res comments array");
 
     //create comment related elements
-    //const commentDiv = document.createElement('div');
+  const commentDiv = document.createElement('div');
+
+
+
 
     const commentsArr = res.comments;
     //console.log(commentsArr, "commentsArr");
@@ -207,8 +229,10 @@ function viewComments(event) {
 
         commentDiv.append(commentBody, deleteCommentBtn);
 
+console.log(commentDiv, "commentDiv");
         //console.log(commentsArr[i], "i commentsArr");
-        event.target.parentNode.append(commentDiv);
+        const commentsDisplay = document.getElementById("commentsDisplay");
+        commentsDisplay.appendChild(commentDiv);
       }
     }
 
@@ -292,7 +316,7 @@ console.log(createCommentInput, "createCommentInput");
   })
   //add new post to dom by forcing page to refresh, which would call listAllPosts again
   .then((res) => {
-    alert("comment submitted!");
+    alert("You have had your say!");
     window.location.reload(false);
     // console.log(postId, "create comment submit");
     // viewComments(event);
@@ -301,5 +325,43 @@ console.log(createCommentInput, "createCommentInput");
   .catch((err) => {
       console.log(err);
   })
+
+}
+
+
+
+//get username of person who posted
+function userLookup(u, p){
+
+let username = "";
+console.log(p, "p");
+const postAuthorTarget = document.querySelector(`[author_id = "${p}"]`).children[0];
+
+console.log(postAuthorTarget, "postAuthorTarget");
+
+  fetch('http://localhost:8181/listUsers', {
+       headers: {
+           "Authorization": "Bearer " + localStorage.getItem('user'),
+           "Content-Type" : "application/json"
+       }
+})
+
+.then((res) => {
+  return res.json();
+})
+
+.then((res) => {
+  for(let i = 0; i < res.length; i++) {
+    if(res[i].id == u) {
+      username = res[i].username;
+
+      postAuthorTarget.innerText = username;
+
+    }
+
+
+  }
+
+})
 
 }
