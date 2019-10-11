@@ -231,7 +231,7 @@ function deleteComment(commentId) {
   .then((res) => {
     console.log(res, "res in delete comment");
     if (res.status == 200) {
-      viewComments(res.post);
+      window.location.reload(false);
       alert("Comment Was Defeated!");
     } else if (res.status == 405){
       alert("This Is Not Your Comment To Fight. (Mind your own comments!)");
@@ -245,26 +245,27 @@ function deleteComment(commentId) {
 
 //CREATE COMMENT BOX
 function createCommentBox(event){
+  const postId = event.target.parentNode.getAttribute("id");
+  console.log(event.target.parentNode.id, 'post id in createCommentBox');
+
   const createCommentDiv = document.createElement('div');
   createCommentDiv.classList.add('createCommentDiv');
 
   const createCommentInput = document.createElement('textarea');
-  createCommentInput.classList.add('createCommentInput');
+  createCommentInput.classList.add(`createCommentInputForPost-${postId}`);
 
   const createCommentBtn = document.createElement('button');
   createCommentBtn.innerText = "submit comment";
-  createCommentBtn.classList.add('submitCommentBtn');
+  createCommentBtn.classList.add('createCommentBtn');
 
   createCommentDiv.append(createCommentInput, createCommentBtn);
 
-  const postId = event.target.parentNode.id;
 
-  console.log(event.target.parentNode.id, 'post id in createCommentBox');
   //create comment addEventListener
   createCommentBtn.addEventListener("click", function(event) {
     event.preventDefault();
-
     createComment(postId);
+
   });
 
   event.target.parentNode.append(createCommentDiv);
@@ -273,8 +274,8 @@ function createCommentBox(event){
 
 //CREATE COMMENT
 function createComment(postId) {
-  const createCommentInput = document.querySelector('createCommentInput');
-
+  const createCommentInput = document.querySelector(`.createCommentInputForPost-${postId}`);
+console.log(createCommentInput, "createCommentInput");
   fetch(`http://localhost:8181/comment/createOn${postId}`, {
       method: 'POST',
       headers: {
@@ -286,9 +287,15 @@ function createComment(postId) {
       })
   })
 
+  .then((res) => {
+    return res.json();
+  })
   //add new post to dom by forcing page to refresh, which would call listAllPosts again
   .then((res) => {
-      viewComments(postId);
+    alert("comment submitted!");
+    window.location.reload(false);
+    // console.log(postId, "create comment submit");
+    // viewComments(event);
   })
 
   .catch((err) => {
