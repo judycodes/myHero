@@ -20,7 +20,9 @@ function listAllPosts () {
   })
 
 .then((res) => {
-  console.log("list posts", res);
+
+  //console.log("list posts", res);
+
   const postsDisplay = document.querySelector('#postsDisplay');
 
   //loop through posts in database - places recent posts on top of page
@@ -43,10 +45,7 @@ function listAllPosts () {
     //adds post content to created post title and post body elements
     postTitle.innerText = res[i].post_title;
     postBody.innerText = res[i].post_body;
-
     postAuthor.innerHTML = `|| author: <span class="username"></span>`;
-
-
 
   //===delete related elements===//
   const deletePostBtn = document.createElement('button');
@@ -123,26 +122,32 @@ function createPost(event) {
     const newPostTitle = document.querySelector('#newPostTitle');
     const newPostBody = document.querySelector('#newPostBody');
 
-    fetch("http://localhost:8181/post/create", {
-        method: 'POST',
-        headers: {
-          "Authorization": "Bearer " + localStorage.getItem('user'),
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            post_title: newPostTitle.value,
-            post_body: newPostBody.value
-        })
-    })
+if(newPostBody.value !== "") {
+  fetch("http://localhost:8181/post/create", {
+      method: 'POST',
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem('user'),
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+          post_title: newPostTitle.value,
+          post_body: newPostBody.value
+      })
+  })
 
-    //add new post to dom by forcing page to refresh, which would call listAllPosts again
-    .then((res) => {
-        window.location.reload(true);
-    })
+  //add new post to dom by forcing page to refresh, which would call listAllPosts again
+  .then((res) => {
+      window.location.reload(true);
+  })
 
-    .catch((err) => {
-        console.log(err);
-    })
+  .catch((err) => {
+      console.log(err);
+  })
+
+} else {
+  alert("Please fill in all fields, before you submit!");
+}
+
 }
 
 //DELETE POST
@@ -190,9 +195,6 @@ function viewComments(event) {
     //create comment related elements
   const commentDiv = document.createElement('div');
 
-
-
-
     const commentsArr = res.comments;
     //console.log(commentsArr, "commentsArr");
 
@@ -230,7 +232,7 @@ function viewComments(event) {
         commentDiv.append(commentBody, deleteCommentBtn);
 
 console.log(commentDiv, "commentDiv");
-        //console.log(commentsArr[i], "i commentsArr");
+
         const commentsDisplay = document.getElementById("commentsDisplay");
         commentsDisplay.appendChild(commentDiv);
       }
@@ -330,14 +332,14 @@ console.log(createCommentInput, "createCommentInput");
 
 
 
-//get username of person who posted
+//GET USERNAME
 function userLookup(u, p){
 
 let username = "";
 console.log(p, "p");
-const postAuthorTarget = document.querySelector(`[author_id = "${p}"]`).children[0];
+const authorTarget = document.querySelector(`[author_id = "${p}"]`).children[0];
 
-console.log(postAuthorTarget, "postAuthorTarget");
+console.log(authorTarget, "authorTarget");
 
   fetch('http://localhost:8181/listUsers', {
        headers: {
@@ -355,7 +357,7 @@ console.log(postAuthorTarget, "postAuthorTarget");
     if(res[i].id == u) {
       username = res[i].username;
 
-      postAuthorTarget.innerText = username;
+      authorTarget.innerText = username;
 
     }
 

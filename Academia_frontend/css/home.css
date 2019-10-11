@@ -149,6 +149,10 @@ header {
   margin-right: 50px;
 } */
 
+.username {
+  font-size: 25px;
+}
+
 /*===COMMENT SECTION===*/
 .commentDiv {
   display: flex;
