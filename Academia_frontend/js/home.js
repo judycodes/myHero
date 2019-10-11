@@ -163,13 +163,22 @@ function viewComments(event) {
 
     const commentsArr = res.comments;
 
-    console.log(commentsArr, "commentsArr");
-    for(let i=0; i < commentsArr.length; i++) {
-      const commentBody = document.createElement('p');
-      commentBody.innerText = commentsArr[i].comment_body;
-      console.log(commentsArr[i], "i commentsArr");
-      event.target.parentNode.append(commentBody);
+    //if there are no comments for post
+    if(commentsArr == [] || commentsArr.length == 0) {
+      const noCommentsMsg = document.createElement('p');
+      noCommentsMsg.classList.add('noCommentsMsg');
+      noCommentsMsg.innerText = "No Comments Yet. Have something to say? Comment away~";
+      event.target.parentNode.append(noCommentsMsg);
+    } else {
+      console.log(commentsArr, "commentsArr");
+      for(let i=0; i < commentsArr.length; i++) {
+        const commentBody = document.createElement('p');
+        commentBody.innerText = commentsArr[i].comment_body;
+        console.log(commentsArr[i], "i commentsArr");
+        event.target.parentNode.append(commentBody);
+      }
     }
+
     })
     .then((error) => {
       console.log(error);
