@@ -205,7 +205,8 @@ function viewComments(event) {
         commentDiv.classList.add('commentDiv');
 
         const commentBody = document.createElement('p');
-        commentBody.innerText = commentsArr[i].comment_body;
+
+        commentBody.innerText = `Young ${commentsArr[i].user.username} says: ${commentsArr[i].comment_body}`;
 
         //creates deleteCommentBtn
         const deleteCommentBtn = document.createElement('button');
