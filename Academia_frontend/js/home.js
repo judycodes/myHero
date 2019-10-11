@@ -300,33 +300,43 @@ function createCommentBox(event){
 
 //CREATE COMMENT
 function createComment(postId) {
+
   const createCommentInput = document.querySelector(`.createCommentInputForPost-${postId}`);
-console.log(createCommentInput, "createCommentInput");
-  fetch(`http://localhost:8181/comment/createOn${postId}`, {
-      method: 'POST',
-      headers: {
-        "Authorization": "Bearer " + localStorage.getItem('user'),
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-          comment_body: createCommentInput.value
-      })
-  })
 
-  .then((res) => {
-    return res.json();
-  })
-  //add new post to dom by forcing page to refresh, which would call listAllPosts again
-  .then((res) => {
-    alert("You have had your say!");
-    window.location.reload(false);
-    // console.log(postId, "create comment submit");
-    // viewComments(event);
-  })
+  //console.log(createCommentInput, "createCommentInput");
 
-  .catch((err) => {
-      console.log(err);
-  })
+  if(createCommentInput.value !== "") {
+    fetch(`http://localhost:8181/comment/createOn${postId}`, {
+        method: 'POST',
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem('user'),
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            comment_body: createCommentInput.value
+        })
+    })
+
+    .then((res) => {
+      return res.json();
+    })
+    //add new post to dom by forcing page to refresh, which would call listAllPosts again
+    .then((res) => {
+      alert("You have had your say!");
+      window.location.reload(false);
+      // console.log(postId, "create comment submit");
+      // viewComments(event);
+    })
+
+    .catch((err) => {
+        console.log(err);
+    })
+  }  else {
+    alert("What? You have nothing to say?");
+  }
+
+
+
 
 }
 
