@@ -37,7 +37,6 @@ function listAllPosts () {
   const postBody = document.createElement('p');
   const postAuthor = document.createElement('span');
   postAuthor.classList.add("postAuthor");
-  postAuthor.setAttribute("author_id", postId);
 
     //gives postdiv an id of actual post
     postDiv.id = `${res[i].id}`;
@@ -45,7 +44,7 @@ function listAllPosts () {
     //adds post content to created post title and post body elements
     postTitle.innerText = res[i].post_title;
     postBody.innerText = res[i].post_body;
-    postAuthor.innerHTML = `|| author: <span class="username"></span>`;
+    postAuthor.innerText = `|| author: ${res[i].user.username}`;
 
   //===delete related elements===//
   const deletePostBtn = document.createElement('button');
@@ -91,16 +90,6 @@ function listAllPosts () {
 
 //adds all posts to postsDisplay
   postsDisplay.appendChild(postDiv);
-
-
-  if(res[i].user.id){
-    userLookup(res[i].user.id, postId);
-
-
-    } else {
-    userLookup(res[i].user, postId);
-
-  }
 
   }
   })
@@ -342,38 +331,56 @@ function createComment(postId) {
 
 
 
-//GET USERNAME
-function userLookup(u, p){
-
-let username = "";
-console.log(p, "p");
-const authorTarget = document.querySelector(`[author_id = "${p}"]`).children[0];
-
-console.log(authorTarget, "authorTarget");
-
-  fetch('http://localhost:8181/listUsers', {
-       headers: {
-           "Authorization": "Bearer " + localStorage.getItem('user'),
-           "Content-Type" : "application/json"
-       }
-})
-
-.then((res) => {
-  return res.json();
-})
-
-.then((res) => {
-  for(let i = 0; i < res.length; i++) {
-    if(res[i].id == u) {
-      username = res[i].username;
-
-      authorTarget.innerText = username;
-
-    }
-
-
-  }
-
-})
-
-}
+//GET USERNAME - unnecessary due to removal of:
+// @JsonIdentityInfo(
+//         generator = ObjectIdGenerators.PropertyGenerator.class,
+//         property = "id"
+// )
+//from USER model
+//
+// previously in listAllPosts
+// if(res[i].user.id){
+//   userLookup(res[i].user.id, postId);
+//
+//
+//   } else {
+//   userLookup(res[i].user, postId);
+//
+// }
+//
+//postAuthor.innerHTML = `|| author: <span class="username"></span>`;
+//postAuthor.setAttribute("author_id", postId);
+//
+// function userLookup(u, p){
+//
+// let username = "";
+// console.log(p, "p");
+// const authorTarget = document.querySelector(`[author_id = "${p}"]`).children[0];
+//
+// console.log(authorTarget, "authorTarget");
+//
+//   fetch('http://localhost:8181/listUsers', {
+//        headers: {
+//            "Authorization": "Bearer " + localStorage.getItem('user'),
+//            "Content-Type" : "application/json"
+//        }
+// })
+//
+// .then((res) => {
+//   return res.json();
+// })
+//
+// .then((res) => {
+//   for(let i = 0; i < res.length; i++) {
+//     if(res[i].id == u) {
+//       username = res[i].username;
+//
+//       authorTarget.innerText = username;
+//     }
+//
+//
+//   }
+//
+// })
+//
+// }
