@@ -11,6 +11,7 @@ h1{
   font-variant: small-caps;
   font-size: 2em;
   color: #0e367c;
+  text-shadow: 1px 1px #fff;
 }
 
 /*===Main===*/
@@ -49,9 +50,8 @@ nav {
 }
 
 /*===BUTTONS===*/
-button {
+#update-profile {
   font-family: 'Abel', sans-serif;
-  font-size: 0.9em;
   border-radius: 5px;
   font-size: 40px;
   font-variant: small-caps;
@@ -59,6 +59,33 @@ button {
   color: #0e367c;
   margin-left: 95px;
 }
+
+
+
+/*============POSTS==========*/
+
+/*===show-post and show-comments button===*/
+#show-posts, #show-comments {
+font-family: 'Abel', sans-serif;
+font-size: 20px;
+border-radius: 5px;
+padding: 5px;
+color: #0e367c;
+}
+
+
+
+
+
+/*===Posts Div===*/
+#postTitle, #postBody {
+  font-size: 40px;
+  margin-top: 100px;
+  margin-bottom: 50px;
+
+}
+
+
 
 /*===IMAGES===*/
 i {
@@ -69,7 +96,7 @@ i {
 body {
   font-size: 1em;
   line-height: 1.5;
-  background: linear-gradient(rgba(255,255,255, 0.2), rgba(255,255,255,0.6)), url('../imgs/profile/profile_desktop.jpg');
+  background: linear-gradient(rgba(255,255,255, 0.5), rgba(255,255,255,0.6)), url('../imgs/profile/profile_desktop.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
@@ -97,10 +124,10 @@ header {
 /*===FORMS===*/
 
 form {
-  margin-top: 20px;
+  margin-top: 5px;
   margin-left: 190px;
   border: 3px solid #0e367c;
-  height: 500px;
+  height: 350px;
   width: 350px;
   padding: 15px;
 }
@@ -159,4 +186,30 @@ footer {
   justify-content: center;
   align-items: center;
   font-size: 50px;
+}
+
+/*===right-side-div */
+#right-side {
+  border-style: solid;
+  padding-left: 15px;
+  padding-right: 15px;
+  color: #0e367c;
+}
+
+
+/* This class comes from the profile.js
+in lines 76 and 82 */
+.responseInfo, #displayUsername, #displayPrimaryEmail{
+  color: black;
+  /* text-shadow: 1px 1px #fff; */
+  font-size: 35px;
+  margin-left: 30px;
+}
+
+.postCommentButton {
+  display: flex;
+}
+
+.ok {
+  margin-top: 50px;
 }
