@@ -206,10 +206,20 @@ in lines 76 and 82 */
   margin-left: 30px;
 }
 
+
+
 .postCommentButton {
+  margin-top: 20px;
   display: flex;
+  justify-content: space-between;
 }
+
+
 
 .ok {
   margin-top: 50px;
+}
+
+#userCommentDisplay {
+  font-size: 20px;
 }
