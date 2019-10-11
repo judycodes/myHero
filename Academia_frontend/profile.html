@@ -12,25 +12,23 @@
 
 <!--External Stylesheet - PROFILE -->
     <link rel="stylesheet" type="text/css" href="css/profile.css">
-
   </head>
-
   <body>
 
 <!--Nav-->
-    <header>
-      <nav>
-        <a href="./home.html" class="nav-link" id="home-link">HOME</a>
-        <a href="./about.html" class="nav-link" id="about-link">ABOUT</a>
-        <a href="./profile.html" class="nav-link" id="profile-link">PROFILE</a>
+  <header>
+    <nav>
+      <a href="./home.html" class="nav-link" id="home-link">HOME</a>
+      <a href="./about.html" class="nav-link" id="about-link">ABOUT</a>
+      <a href="./profile.html" class="nav-link" id="profile-link">PROFILE</a>
       </nav>
-    </header>
+  </header>
 
 <!-- main -->
   <main>
     <div>
 
-<!-- Form on he left side-->
+<!-- Start of Form-->
       <form id="profile-form">
 
 <!-- h1 for the left form -->
@@ -39,51 +37,71 @@
         </div>
 
 <!--Second-email-->
-      <div id="second-email" class="flex">
-        <label for="2email"><i class ="fa fa-envelope"></i>
+        <div id="second-email" class="flex">
+          <label for="2email"><i class ="fa fa-envelope"></i>
           <input type ="text" id="update-secondEmail" name="secondEmail"
           placeholder="Second Email"/>
-        </label>
-      </div>
+          </label>
+        </div>
 
 <!--mobile-->
-      <div id="mobile" class="flex">
-        <label for="mbile"><i class ="fa fa-key"></i>
+        <div id="mobile" class="flex">
+          <label for="mbile"><i class ="fa fa-key"></i>
           <input type="text" id="update-mobile" name="mphone"
           placeholder="Mobile"/>
-        </label>
-      </div>
+          </label>
+        </div>
 
-<!--Heroname-->
-      <div id="HeroName" class="flex">
-        <label for="Hname"><i class ="fa fa-key"></i>
-          <input type="text" id="Hero-name" name="hname"
-          placeholder="Superhero name"/>
-        </label>
-      </div>
-
-<!-- Catchphrae -->
-      <div id="CatchPhrase" class ="flex">
-        <label for="Cphrase"><i class="fa fa-key"></i>
-          <input type ="text" id="Catch-Phrase" name="cPhrase"
-          placeholder="Catch-Phrase"/>
-        </label>
-      </div>
 
 <!-- button -->
-      <button id="update-profile">Update</button>
-    </div>
-  </form>
+        <button id="update-profile">Update</button>
+      </div>
 
-<!-- Form for the right side  -->
-  <form id="profile-results">
+<!-- End of form -->
+    </form>
 
-<!--h1 for the right form -->
-    <div id="right">
-      <h1>Your Profile!</h1>
+    <div id="profile-results">
+
+<!--Div for the right side-->
+      <div id="right-side">
+
+        <div>
+          <h1>Username</h1>
+          <div id="displayUsername"></div>
+        </div>
+
+        <div>
+          <h1>Primary Email</h1>
+        <div id="displayPrimaryEmail"></div>
+
+        </div>
+        <div>
+        <h1>Secondary Email</h1>
+        <div id="secondEmail" class="profileLabels"></div>
+      </div>
+
+      <div>
+        <h1>Mobile</h1>
+        <div id="defaultMobile" class="profileLabels"></div>
+      </div>
     </div>
-  </form>
-</main>
+
+    <!-- Div to show user's posts -->
+  <div class = "postCommentButton">
+
+          <button id="show-posts">Show Post</button>
+
+    <!-- Div to show comment's posts -->
+
+          <button id="show-comments">Show Comments</button>
+    </div>
+<div id="userPostDisplay" class="ok"></div>
+<div id="userCommentDisplay" class="ok"></div>
+  </div>
+
+
+
+  </main>
 
 <!--Footer for the right  -->
     <footer>
@@ -93,10 +111,9 @@
         <li><a href="https://twitter.com/myheroacademias?lang=en" target="_blank" class="media-link"><i class="fa fa-twitter-square"></i></a></li>
       </ul>
     </footer>
-    <!--EXTERNAL JS FILE-->
-  <script src="js/profile.js" lang="js" type="text/javascript"></script>
-  <script src="js/checkLoggedIn.js" lang="js" type="text/javascript"></script>
-  </body>
 
+<!-- Connect to the js -->
+      <script src="./js/profile.js"></script>
+  <script src="js/checkLoggedIn.js" lang="js" type="text/javascript"></script>
   </body>
 </html>
