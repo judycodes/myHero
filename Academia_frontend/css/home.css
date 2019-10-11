@@ -68,10 +68,14 @@ button {
   border-radius: 5px;
   font-variant: small-caps;
   padding: 8px;
+  margin: 0px 20px;
+  outline: none;
+  border: none;
 }
 
 button:hover {
   color: #fba257;
+  border: 1px solid #fba257;
 }
 
 /*===IMAGES===*/
@@ -141,6 +145,12 @@ header {
 } */
 
 /*===COMMENT SECTION===*/
+.commentDiv {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
 
 /*===FORMS===*/
 /*==createNewPostSection===*/

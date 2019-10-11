@@ -172,10 +172,27 @@ function viewComments(event) {
     } else {
       console.log(commentsArr, "commentsArr");
       for(let i=0; i < commentsArr.length; i++) {
+        //individual comment
+        const commentDiv = document.createElement('div');
+        commentDiv.classList.add('commentDiv');
+        
         const commentBody = document.createElement('p');
         commentBody.innerText = commentsArr[i].comment_body;
-        console.log(commentsArr[i], "i commentsArr");
-        event.target.parentNode.append(commentBody);
+
+
+        //creates deleteCommentBtn
+        const deleteCommentBtn = document.createElement('button');
+        deleteCommentBtn.innerText = "delete comment";
+        deleteCommentBtn.classList.add('deleteCommentBtn');
+
+
+        //deleteCommentBtn addEventListener
+        deleteCommentBtn.addEventListener('click', deleteComment(event));
+
+        commentDiv.append(commentBody, deleteCommentBtn);
+
+        //console.log(commentsArr[i], "i commentsArr");
+        event.target.parentNode.append(commentDiv);
       }
     }
 
@@ -185,13 +202,10 @@ function viewComments(event) {
     })
 
 
+//DELETE COMMENT
+function deleteComment(event) {
 
-// incomplete comment display
-// if(res[i].comments !== []) {
-//   //adds comment content to create comment elements
-//   commentBody.innerText = res[i].comments.comment_body;
-//   commentDiv.append(commentBody);
-// }
+}
 
 
 }

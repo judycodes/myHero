@@ -8,7 +8,7 @@ function checkLogin() {
   if (localStorage.getItem('user') != null) {
     const navBar = document.querySelector('nav');
     const navItem = navBar.lastElementChild;
-    navItem.innerText = "\"YOUNG " + localStorage.getItem('username').toUpperCase() + "\"";
+    navItem.innerText = "\"YOUNG " + localStorage.getItem('username').toUpperCase() + "\'s PROFILE \"";
     navItem.href = "profile.html";
 
     const logout = document.createElement('a');
