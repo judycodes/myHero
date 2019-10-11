@@ -55,7 +55,16 @@ function listAllPosts () {
     deletePost(postId);
     });
 
+//===create comment related elements===//
+  const showCommentBoxBtn = document.createElement('button');
+  showCommentBoxBtn.innerText = "create comment";
+
+  showCommentBoxBtn.addEventListener("click", function(event){
+    event.preventDefault();
+    createCommentBox(event);
+  });
   //===view comments related elements===//
+
   const viewCommentsBtn = document.createElement('button');
 
     //view comments button styling
@@ -70,7 +79,7 @@ function listAllPosts () {
 
 //adds post to each postDiv element
   postTitle.append(postAuthor);
-  postDiv.append(postTitle, postBody, deletePostBtn, viewCommentsBtn);
+  postDiv.append(postTitle, postBody, deletePostBtn, viewCommentsBtn, showCommentBoxBtn);
 
 //adds all posts to postsDisplay
   postsDisplay.appendChild(postDiv);
@@ -89,8 +98,8 @@ const createPostBtn = document.querySelector('#createPostBtn');
 createPostBtn.addEventListener('click', createPost);
 
 //create posts
-function createPost(e) {
-    e.preventDefault();
+function createPost(event) {
+    event.preventDefault();
 
     const newPostTitle = document.querySelector('#newPostTitle');
     const newPostBody = document.querySelector('#newPostBody');
@@ -158,10 +167,12 @@ function viewComments(event) {
   .then((res) => {
     console.log(res, "res in view comments");
     //console.log(res.comments, "res comments array");
+
     //create comment related elements
-//const commentDiv = document.createElement('div');
+    //const commentDiv = document.createElement('div');
 
     const commentsArr = res.comments;
+    //console.log(commentsArr, "commentsArr");
 
     //if there are no comments for post
     if(commentsArr == [] || commentsArr.length == 0) {
@@ -170,11 +181,11 @@ function viewComments(event) {
       noCommentsMsg.innerText = "No Comments Yet. Have something to say? Comment away~";
       event.target.parentNode.append(noCommentsMsg);
     } else {
-      console.log(commentsArr, "commentsArr");
+
       for(let i=0; i < commentsArr.length; i++) {
+
         //comment id needed to delete comment
         const commentId = commentsArr[i].id;
-
 
         //individual comment
         const commentDiv = document.createElement('div');
@@ -205,6 +216,7 @@ function viewComments(event) {
     .then((error) => {
       console.log(error);
     })
+}
 
 
 //DELETE COMMENT
@@ -219,8 +231,6 @@ function deleteComment(commentId) {
   .then((res) => {
     console.log(res, "res in delete comment");
     if (res.status == 200) {
-      //window.location.reload(true);
-      console.log(res, 'res in delete comment')
       viewComments(res.post);
       alert("Comment Was Defeated!");
     } else if (res.status == 405){
@@ -230,10 +240,59 @@ function deleteComment(commentId) {
     .then((error) => {
       console.log(error);
     })
-
-
-
 }
 
+
+//CREATE COMMENT BOX
+function createCommentBox(event){
+  const createCommentDiv = document.createElement('div');
+  createCommentDiv.classList.add('createCommentDiv');
+
+  const createCommentInput = document.createElement('textarea');
+  createCommentInput.classList.add('createCommentInput');
+
+  const createCommentBtn = document.createElement('button');
+  createCommentBtn.innerText = "submit comment";
+  createCommentBtn.classList.add('submitCommentBtn');
+
+  createCommentDiv.append(createCommentInput, createCommentBtn);
+
+  const postId = event.target.parentNode.id;
+
+  console.log(event.target.parentNode.id, 'post id in createCommentBox');
+  //create comment addEventListener
+  createCommentBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+
+    createComment(postId);
+  });
+
+  event.target.parentNode.append(createCommentDiv);
+}
+
+
+//CREATE COMMENT
+function createComment(postId) {
+  const createCommentInput = document.querySelector('createCommentInput');
+
+  fetch(`http://localhost:8181/comment/createOn${postId}`, {
+      method: 'POST',
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem('user'),
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+          comment_body: createCommentInput.value
+      })
+  })
+
+  //add new post to dom by forcing page to refresh, which would call listAllPosts again
+  .then((res) => {
+      viewComments(postId);
+  })
+
+  .catch((err) => {
+      console.log(err);
+  })
 
 }
