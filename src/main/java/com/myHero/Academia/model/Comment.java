@@ -1,6 +1,7 @@
 package com.myHero.Academia.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
@@ -30,6 +31,7 @@ public class Comment {
 
     public void setUser(User user) {this.user = user;}
 
+    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST,
     CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "post_id")
