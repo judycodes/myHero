@@ -26,7 +26,7 @@ function listAllPosts () {
   //loop through posts in database
   for(let i = res.length-1; i >= 0; i--) {
 
-
+    //post id needed to delete post
     const postId = res[i].id;
 
   //===create post related elements===//
@@ -172,22 +172,27 @@ function viewComments(event) {
     } else {
       console.log(commentsArr, "commentsArr");
       for(let i=0; i < commentsArr.length; i++) {
+        //comment id needed to delete comment
+        const commentId = commentsArr[i].id;
+
+
         //individual comment
         const commentDiv = document.createElement('div');
         commentDiv.classList.add('commentDiv');
-        
+
         const commentBody = document.createElement('p');
         commentBody.innerText = commentsArr[i].comment_body;
-
 
         //creates deleteCommentBtn
         const deleteCommentBtn = document.createElement('button');
         deleteCommentBtn.innerText = "delete comment";
         deleteCommentBtn.classList.add('deleteCommentBtn');
 
-
         //deleteCommentBtn addEventListener
-        deleteCommentBtn.addEventListener('click', deleteComment(event));
+        deleteCommentBtn.addEventListener('click', function(event) {
+          event.preventDefault();
+          deleteComment(commentId)
+        });
 
         commentDiv.append(commentBody, deleteCommentBtn);
 
@@ -203,7 +208,30 @@ function viewComments(event) {
 
 
 //DELETE COMMENT
-function deleteComment(event) {
+function deleteComment(commentId) {
+  fetch((`http://localhost:8181/comment/delete-${commentId}`), {
+    method: 'DELETE',
+    headers: {
+      "Authorization": "Bearer " + localStorage.getItem('user'),
+      "Content-Type": "application/json"
+    }
+  })
+  .then((res) => {
+    console.log(res, "res in delete comment");
+    if (res.status == 200) {
+      //window.location.reload(true);
+      console.log(res, 'res in delete comment')
+      viewComments(res.post);
+      alert("Comment Was Defeated!");
+    } else if (res.status == 405){
+      alert("This Is Not Your Comment To Fight. (Mind your own comments!)");
+    }
+    })
+    .then((error) => {
+      console.log(error);
+    })
+
+
 
 }
 

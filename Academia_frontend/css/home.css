@@ -147,8 +147,8 @@ header {
 /*===COMMENT SECTION===*/
 .commentDiv {
   display: flex;
-  justify-content: space-around;
-  align-items: center;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 
