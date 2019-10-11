@@ -1,5 +1,6 @@
 package com.myHero.Academia.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 
@@ -17,12 +18,11 @@ public class UserProfile {
     @Column
     private String secondary_email;
 
-    @JsonIgnore
     @OneToOne(mappedBy = "userProfile", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JsonManagedReference
     private User user;
 
-    public UserProfile() {
-    }
+    public UserProfile() {}
 
     // ===return user ===//
     public User getUser() {

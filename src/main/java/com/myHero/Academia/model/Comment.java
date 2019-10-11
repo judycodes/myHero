@@ -1,15 +1,11 @@
 package com.myHero.Academia.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
-
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
-)
 
 @Entity
 @Table(name= "comments")
@@ -27,19 +23,11 @@ public class Comment {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public User getUser(){return user;}
-
-    public void setUser(User user) {this.user = user;}
-
-    @JsonIgnore
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST,
     CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "post_id")
+    @JsonBackReference
     private Post post;
-
-    public Post getPost() {return post;}
-
-    public void setPost(Post post) {this.post = post;}
 
     //=== empty constructor ===//
     public Comment() {}
@@ -56,6 +44,13 @@ public class Comment {
     //=== parameter comment_body ===//
     public void setComment_body(String comment_body) { this.comment_body = comment_body; }
 
+    public Post getPost() {return post;}
+
+    public void setPost(Post post) {this.post = post;}
+
+    public User getUser(){return user;}
+
+    public void setUser(User user) {this.user = user;}
 }
 
 

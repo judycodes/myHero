@@ -1,15 +1,11 @@
 package com.myHero.Academia.model;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.List;
-
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
-)
 
 @Entity
 @Table(name= "posts")
@@ -28,6 +24,10 @@ public class Post {
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinColumn(name = "user_id")
     private User user;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<Comment> comments;
 
     //=== empty constructor ===//
     public Post() {}
@@ -65,9 +65,6 @@ public class Post {
     public User getUser() { return user; }
 
     public void setUser(User user) { this.user = user; }
-
-    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-    private List<Comment> comments;
 
     public List<Comment> getComments() {return comments;}
 

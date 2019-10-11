@@ -68,10 +68,19 @@ button {
   border-radius: 5px;
   font-variant: small-caps;
   padding: 8px;
+  margin: 5px 20px;
+  outline: none;
+  border: none;
 }
 
 button:hover {
   color: #fba257;
+  border: 1px solid #fba257;
+}
+
+
+#createPostBtn {
+  padding: 5px;
 }
 
 /*===IMAGES===*/
@@ -140,7 +149,26 @@ header {
   margin-right: 50px;
 } */
 
+.username {
+  font-size: 25px;
+}
+
 /*===COMMENT SECTION===*/
+.commentDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.createCommentDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  margin: 10px 0px 10px 20px;
+
+}
+
 
 /*===FORMS===*/
 /*==createNewPostSection===*/
@@ -159,10 +187,6 @@ header {
   align-items: center;
 }
 
-#createPostBtn {
-  padding: 5px;
-}
-
 label {
   display:flex;
   flex-direction: column;
@@ -178,7 +202,7 @@ input, textarea {
 }
 
 textarea {
-  height: 280px;
+  height: 100px;
 }
 
 /*===FOOTER===*/

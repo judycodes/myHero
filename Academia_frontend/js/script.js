@@ -16,84 +16,76 @@ const username = document.querySelector('#signUp-userName');
 //LOG IN USER ACCT VARIABLES
 const logInUserName = document.querySelector('#logIn-Username');
 const logInPassword = document.querySelector('#logIn-pw');
-//TOGGLES FORMS DISPLAY
-signUpBtn.addEventListener("click", signUpToggle);
-logInBtn.addEventListener("click", logInToggle);
-function signUpToggle() {
- signUpForm.classList.toggle('none');
- if(signUpForm.classList.contains('none')) {
-   signUpBtn.innerHTML = 'register';
- } else {
-   signUpBtn.innerHTML = 'x';
- }
-};
-function logInToggle() {
- logInForm.classList.toggle('none');
- if(logInForm.classList.contains('none')) {
-   logInBtn.innerHTML = 'log in';
- } else {
-   logInBtn.innerHTML = 'x';
- }
-};
+
 //===REGISTER FUNCTION===//
 signUpSubmit.addEventListener("click", createUser);
 function createUser(e) {
  e.preventDefault();
  localStorage.setItem('username', username.value);
  localStorage.setItem('primaryEmail', email.value);
- fetch('http://localhost:8181/signup', {
-         method: 'POST',
-         headers: {
-             'Content-Type': 'application/json'
-         },
-         body: JSON.stringify({
-             email: email.value,
-             password: password.value,
-             username: username.value
-         })
- })
- .then((res) => {
-     return res.json();
- })
- .then((res) => {
-   token = res.token;//store token value to variable token
-   //console.log("token - create user", token);
-   //console.log("res - create user", res);
-   //console.log("username input value", username.value);
-   //console.log("email input value", email.value);
-   //allows for data persistence between html pages
-   localStorage.setItem('user', token); //stores token as a cookie
-   //redirects user to homepage
-   redirectHome();
- })
- .catch((err) => {
-     console.log(err);
- })
+
+ if(email.value !== "" && password.value !== "" && username.value !== "") {
+   fetch('http://localhost:8181/signup', {
+           method: 'POST',
+           headers: {
+               'Content-Type': 'application/json'
+           },
+           body: JSON.stringify({
+               email: email.value,
+               password: password.value,
+               username: username.value
+           })
+   })
+   .then((res) => {
+       return res.json();
+   })
+   .then((res) => {
+    token = res.token;
+    localStorage.setItem('user', token); 
+     redirectHome();
+   })
+   .catch((err) => {
+       console.log(err);
+   })
+ } else {
+    alert("Young User, all fields must be provided to completed before you can be a HERO! Try applying to be a hero again soon!");
+  }
 }
+
 //===LOGIN FUNCTION===//
 logInSubmit.addEventListener('click', returningUser);
 function returningUser(e) {
    e.preventDefault();
    localStorage.setItem('username', logInUserName.value);
-   fetch('http://localhost:8181/login/', {
-     method: 'POST',
-     headers: { 'Content-Type': 'application/json' },
-     body: JSON.stringify({
-           username: logInUserName.value,
-           password: logInPassword.value
-         })
-     })
-     .then(res => {
-       return res.json();
-     })
-     .then(res => {
-       token = res.token;
-       localStorage.setItem('user', token);
-       redirectHome();
-     })
-     .catch(error => {
-       console.error(error);
-     });
+
+if(logInUserName.value !== "" && logInPassword.value !== "") {
+  fetch('http://localhost:8181/login/', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+          username: logInUserName.value,
+          password: logInPassword.value
+        })
+    })
+    .then(res => {
+      return res.json();
+    })
+    .then(res => {
+      token = res.token;
+      localStorage.setItem('user', token);
+      redirectHome();
+    })
+    .catch(error => {
+      console.error(error);
+    });
+}
+//not working if user does not exist
+else if (localStorage.getItem('user') == null) {
+  alert("Villains are at the gates. Please input your credentials again!");
+} else {
+  alert("Welcome back! Unfortunately, your credentials do not match our Superhero Database. Please try again.")
+}
+
  }
 //===REDIRECT FUNCTION TO HOMEPAGE===//
 function redirectHome() {

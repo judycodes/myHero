@@ -1,15 +1,11 @@
 package com.myHero.Academia.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.List;
-
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
-)
 
 @Entity
 @Table(name= "users")
@@ -30,16 +26,17 @@ public class User {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "profile_id")
+    @JsonBackReference
     private UserProfile userProfile;
+
+    //=== empty constructor ===//
+    public User() {}
 
     //=== return userProfile ===//
     public UserProfile getUserProfile() {return userProfile;}
 
     //=== parameter userProfile ===//
     public void setUserProfile(UserProfile userProfile) {this.userProfile = userProfile;}
-
-    //=== empty constructor ===//
-    public User() {}
 
     //=== return Id ===//
     public Long getId() {return id;}
@@ -65,11 +62,6 @@ public class User {
     //=== parameter Email===//
     public void setEmail(String email) {this.email = email;}
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Post> posts;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Comment> comments;
 
 
 }
