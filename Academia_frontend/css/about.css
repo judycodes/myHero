@@ -95,7 +95,35 @@ header {
 }
 
 /*===MAIN===*/
+main {
+  display:flex;
+  justify-content: center;
+  margin: 100px;
+}
 
+#video {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 50px;
+
+}
+
+#information {
+  background-color: rgba(255,255,255, 0.7);
+  padding: 20px;
+  border-radius: 5px;
+  margin-left: 200px;
+}
+
+#allmight {
+  color: #fba257;
+}
+
+#readMore {
+  margin-left: 150px;
+}
 /*===FOOTER===*/
 footer {
   width: 100%;
