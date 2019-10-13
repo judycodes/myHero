@@ -22,7 +22,6 @@ function listAllPosts () {
 .then((res) => {
 
   //console.log("list posts", res);
-
   const postsDisplay = document.querySelector('#postsDisplay');
 
   //loop through posts in database - places recent posts on top of page
@@ -62,12 +61,12 @@ function listAllPosts () {
   const showCommentBoxBtn = document.createElement('button');
   showCommentBoxBtn.innerText = "create comment";
 
+  //display comment box addEventListener
   showCommentBoxBtn.addEventListener("click", function(event){
     event.preventDefault();
     createCommentBox(event);
   });
   //===view comments related elements===//
-
   const viewCommentsBtn = document.createElement('button');
 
     //view comments button styling
@@ -84,7 +83,7 @@ function listAllPosts () {
   postTitle.append(postAuthor);
   postDiv.append(postTitle, postBody, deletePostBtn, viewCommentsBtn, showCommentBoxBtn);
 
-//adds all posts to postsDisplay
+  //adds all posts to postsDisplay
   postsDisplay.appendChild(postDiv);
 
   }
@@ -107,7 +106,8 @@ function createPost(event) {
     const newPostTitle = document.querySelector('#newPostTitle');
     const newPostBody = document.querySelector('#newPostBody');
 
-if(newPostBody.value !== "") {
+//as long as new post body is not an empty string
+if(newPostBody.value.trim() !== "" && newPostTitle.value.trim() !== "") {
   fetch("http://localhost:8181/post/create", {
       method: 'POST',
       headers: {
@@ -162,6 +162,7 @@ function deletePost(postId) {
 
 //VIEW COMMENTS
 function viewComments(event) {
+  btnPressCounter();
 
     const postId = event.target.parentNode.id;
     fetch((`http://localhost:8181/post/get-${postId}`), {
@@ -184,7 +185,7 @@ function viewComments(event) {
 
       //if there are no comments for post
       if(commentsArr.length == 0) {
-        btnPressCounter();
+
         const noCommentsMsg = document.createElement('p');
         noCommentsMsg.classList.add('noCommentsMsg');
         noCommentsMsg.innerText = "No Comments Yet. Have something to say? Comment away~";
@@ -192,7 +193,6 @@ function viewComments(event) {
       }
       //if there are comments for post
       else {
-        btnPressCounter();
 
         for(let i=0; i < commentsArr.length; i++) {
 
@@ -225,7 +225,9 @@ function viewComments(event) {
           event.target.parentNode.appendChild(commentDiv);
 
         }
+
       }
+
       })
       .catch((error) => {
         console.log(error);
@@ -289,7 +291,7 @@ function createCommentBox(event){
 
   //prevents multiply comment boxes from appearing at one time
   if(document.querySelectorAll(".createCommentDiv").length > 1) {
-    alert("Get talking!");
+    alert("Get commenting!");
     const existingCommentBox = document.querySelector(".createCommentDiv");
     existingCommentBox.remove(document.querySelector(".createCommentDiv"));
   }
