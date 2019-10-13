@@ -116,8 +116,8 @@ function createPost(event) {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            post_title: newPostTitle.value,
-            post_body: newPostBody.value
+            post_title: newPostTitle.value.trim(),
+            post_body: newPostBody.value.trim()
         })
   })
 
@@ -317,7 +317,7 @@ function createComment(postId) {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            comment_body: createCommentInput.value
+            comment_body: createCommentInput.value.trim()
         })
     })
 
