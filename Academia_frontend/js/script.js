@@ -36,12 +36,18 @@ function createUser(e) {
                username: username.value
            })
    })
-   .then((res) => {
-       return res.json();
-   })
+
+   .then(res => {
+            if (res.status == 500) {
+                alert(`A hero already exists with that name and/or email address. \n Try another superhero name or email address.`);
+            } else {
+                return res.json();
+            }
+        })
+
    .then((res) => {
     token = res.token;
-    localStorage.setItem('user', token); 
+    localStorage.setItem('user', token);
      redirectHome();
    })
    .catch((err) => {
@@ -59,6 +65,7 @@ function returningUser(e) {
    localStorage.setItem('username', logInUserName.value);
 
 if(logInUserName.value !== "" && logInPassword.value !== "") {
+
   fetch('http://localhost:8181/login/', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -67,13 +74,22 @@ if(logInUserName.value !== "" && logInPassword.value !== "") {
           password: logInPassword.value
         })
     })
+
     .then(res => {
       return res.json();
     })
+
     .then(res => {
       token = res.token;
-      localStorage.setItem('user', token);
-      redirectHome();
+      //as long as a token is provided for the user, then the user will be redirected to the homepage
+      if(res.token !== null) {
+        localStorage.setItem('user', token);
+        redirectHome();
+      } //if username/password does not match an account in the database, user will not be redirected to homepage and will be informed
+      else {
+        alert(`Check your credentials again. \n Your username or password is incorrect. \n Or you are no hero at U.A. High School.`);
+      }
+
     })
     .catch(error => {
       console.error(error);
