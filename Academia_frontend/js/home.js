@@ -80,13 +80,9 @@ function listAllPosts () {
       viewComments(event);
     });
 
-//adds post to each postDiv element
-
-    const commentsDisplay = document.createElement('div');
-    commentsDisplay.setAttribute("id", "commentsDisplay");
-
+  //adds post to each postDiv element
   postTitle.append(postAuthor);
-  postDiv.append(postTitle, postBody, deletePostBtn, viewCommentsBtn, showCommentBoxBtn, commentsDisplay);
+  postDiv.append(postTitle, postBody, deletePostBtn, viewCommentsBtn, showCommentBoxBtn);
 
 //adds all posts to postsDisplay
   postsDisplay.appendChild(postDiv);
@@ -188,7 +184,7 @@ function viewComments(event) {
     //console.log(commentsArr, "commentsArr");
 
     //if there are no comments for post
-    if(commentsArr == [] || commentsArr.length == 0) {
+    if(commentsArr.length == 0) {
       const noCommentsMsg = document.createElement('p');
       noCommentsMsg.classList.add('noCommentsMsg');
       noCommentsMsg.innerText = "No Comments Yet. Have something to say? Comment away~";
@@ -199,6 +195,7 @@ function viewComments(event) {
 
         //comment id needed to delete comment
         const commentId = commentsArr[i].id;
+        console.log(commentId, "comment id")
 
         //individual comment
         const commentDiv = document.createElement('div');
@@ -206,7 +203,7 @@ function viewComments(event) {
 
         const commentBody = document.createElement('p');
 
-        commentBody.innerText = `Young ${commentsArr[i].user.username} says: ${commentsArr[i].comment_body}`;
+        commentBody.innerText = `Young ${commentsArr[i].user.username} says, \" ${commentsArr[i].comment_body.trim()} \"`;
 
         //creates deleteCommentBtn
         const deleteCommentBtn = document.createElement('button');
@@ -223,8 +220,7 @@ function viewComments(event) {
 
 console.log(commentDiv, "commentDiv");
 
-        const commentsDisplay = document.getElementById("commentsDisplay");
-        commentsDisplay.appendChild(commentDiv);
+        event.target.parentNode.appendChild(commentDiv);
       }
     }
 
