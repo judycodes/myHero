@@ -160,6 +160,11 @@ header {
   align-items: flex-end;
 }
 
+.commentBody {
+  text-shadow: 1px 0px #fba257;
+  margin-left: 100px;
+}
+
 .createCommentDiv {
   display: flex;
   flex-direction: column;
@@ -169,6 +174,9 @@ header {
 
 }
 
+.noCommentsMsg {
+  text-shadow: 0px 0px 1px #f44242;
+}
 
 /*===FORMS===*/
 /*==createNewPostSection===*/

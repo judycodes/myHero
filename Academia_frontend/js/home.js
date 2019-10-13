@@ -202,6 +202,7 @@ function viewComments(event) {
         commentDiv.classList.add('commentDiv');
 
         const commentBody = document.createElement('p');
+        commentBody.classList.add("commentBody");
 
         commentBody.innerText = `Young ${commentsArr[i].user.username} says, \" ${commentsArr[i].comment_body.trim()} \"`;
 
@@ -310,8 +311,6 @@ function createComment(postId) {
     .then((res) => {
       alert("You have had your say!");
       window.location.reload(false);
-      // console.log(postId, "create comment submit");
-      // viewComments(event);
     })
 
     .catch((err) => {
