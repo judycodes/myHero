@@ -12,7 +12,6 @@ function listAllPosts () {
           "Authorization": "Bearer " + localStorage.getItem('user'),
           "Content-Type" : "application/json"
       }
-
   })
 
  .then((res) => {
@@ -141,6 +140,7 @@ function createPost(event) {
 //DELETE POST
 function deletePost(postId) {
 
+  //deletes post by post id
   fetch((`http://localhost:8181/post/delete-${postId}`), {
     method: 'DELETE',
     headers: {
@@ -153,9 +153,11 @@ function deletePost(postId) {
     //console.log(res, "res in delete post");
 
     //determines if user is allowed to delete post
+      //user can delete if post was created by user
     if (res.status == 200) {
       window.location.reload(true);
       alert("Post Was Defeated!");
+      //user is informed that the post cannot be deleted if current user is not the author
     } else if (res.status == 405){
       alert("This Is Not Your Post To Fight. (Mind your own posts!)");
     }
@@ -243,6 +245,7 @@ function viewComments(event) {
       }
 
       })
+
       .catch((error) => {
         console.log(error);
       })
@@ -252,6 +255,7 @@ function viewComments(event) {
 
 //DELETE COMMENT
 function deleteComment(commentId) {
+  //deletes comment by comment id
   fetch((`http://localhost:8181/comment/delete-${commentId}`), {
     method: 'DELETE',
     headers: {
@@ -259,15 +263,21 @@ function deleteComment(commentId) {
       "Content-Type": "application/json"
     }
   })
+
   .then((res) => {
-    console.log(res, "res in delete comment");
+    //handles if user can delete comment
+    //console.log(res, "res in delete comment");
+
+      //if comment belongs to user, comment can be deleted
     if (res.status == 200) {
       window.location.reload(false);
       alert("Comment Was Defeated!");
+      //if comment does not belong to user, user is informed that the comment cannot be deleted
     } else if (res.status == 405){
       alert("This Is Not Your Comment To Fight. (Mind your own comments!)");
     }
     })
+
     .catch((error) => {
       console.log(error);
     })
@@ -300,6 +310,7 @@ function createCommentBox(event){
 
   });
 
+  //attaches comment box to bottom of post div content
   event.target.parentNode.append(createCommentDiv);
 
 
@@ -334,6 +345,7 @@ function createComment(postId) {
     .then((res) => {
       return res.json();
     })
+
     //add new post to dom by forcing page to refresh, which would call listAllPosts again
     .then((res) => {
       alert("You have had your say!");
@@ -343,6 +355,8 @@ function createComment(postId) {
     .catch((err) => {
         console.log(err);
     })
+
+    //handles empty or whitespace comment input
   }  else {
     alert("No comment? This is not a PRESS conference. Say something!");
   }
