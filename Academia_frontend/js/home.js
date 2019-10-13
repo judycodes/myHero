@@ -40,6 +40,7 @@ function listAllPosts () {
 
     //gives postdiv an id of actual post
     postDiv.id = `${res[i].id}`;
+    postDiv.classList.add("postDiv");
 
     //adds post content to created post title and post body elements
     postTitle.innerText = res[i].post_title;
@@ -104,6 +105,7 @@ createPostBtn.addEventListener('click', createPost);
 function createPost(event) {
     event.preventDefault();
 
+    //new post related elements
     const newPostTitle = document.querySelector('#newPostTitle');
     const newPostBody = document.querySelector('#newPostBody');
 
@@ -129,7 +131,7 @@ function createPost(event) {
   .catch((error) => {
       console.log(error);
   })
-
+  //handles empty inputs
 } else {
   alert("Please fill in all fields, before you submit!");
 }
@@ -149,6 +151,8 @@ function deletePost(postId) {
 
   .then((res) => {
     //console.log(res, "res in delete post");
+
+    //determines if user is allowed to delete post
     if (res.status == 200) {
       window.location.reload(true);
       alert("Post Was Defeated!");
@@ -166,15 +170,18 @@ function deletePost(postId) {
 
 //VIEW COMMENTS
 function viewComments(event) {
-  btnPressCounter();
+  //btnPressCounter();
 
+    //post id needed to delete comment from post
     const postId = event.target.parentNode.id;
+
     fetch((`http://localhost:8181/post/get-${postId}`), {
       headers: {
         "Authorization": "Bearer " + localStorage.getItem('user'),
         "Content-Type": "application/json"
       }
     })
+
     .then((res) => {
       return res.json();
     })
@@ -184,10 +191,11 @@ function viewComments(event) {
       //create comment related elements
       const commentDiv = document.createElement('div');
 
+      //array of comments for specific post
       const commentsArr = res.comments;
       //console.log(commentsArr, "commentsArr");
 
-      //if there are no comments for post
+      //handles if there are no comments for post
       if(commentsArr.length == 0) {
 
         const noCommentsMsg = document.createElement('p');
@@ -195,7 +203,8 @@ function viewComments(event) {
         noCommentsMsg.innerText = "No Comments Yet. Have something to say? Comment away~";
         event.target.parentNode.append(noCommentsMsg);
       }
-      //if there are comments for post
+
+      //if there are comments for specific post
       else {
 
         for(let i=0; i < commentsArr.length; i++) {
@@ -204,7 +213,7 @@ function viewComments(event) {
           const commentId = commentsArr[i].id;
           //console.log(commentId, "comment id")
 
-          //individual comment
+          //individual comment related elements
           const commentDiv = document.createElement('div');
           commentDiv.classList.add('commentDiv');
 
@@ -226,6 +235,7 @@ function viewComments(event) {
 
           commentDiv.append(commentBody, deleteCommentBtn);
 
+          //appends comment div containing comment body and delete button to bottom of post div
           event.target.parentNode.appendChild(commentDiv);
 
         }
@@ -340,13 +350,13 @@ function createComment(postId) {
 }
 
 //view comments button count - stops user from viewing comments more than once
-let btnPressCount = 0;
-function btnPressCounter(){
-
-  if(btnPressCount == 0) {
-    btnPressCount++;
-  } else {
-  alert("You are viewing the comments display already.");
-  window.location.reload(false);
-}
-}
+// let btnPressCount = 0;
+// function btnPressCounter(){
+//
+//   if(btnPressCount == 0) {
+//     btnPressCount++;
+//   } else {
+//   alert("You are viewing the comments display already.");
+//   window.location.reload(false);
+// }
+// }

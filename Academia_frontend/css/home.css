@@ -146,6 +146,10 @@ header {
   flex-grow: 2;
 }
 
+.postDiv {
+  padding-left: 30px;
+}
+
 .postBody {
   padding-left: 30px;
 }
