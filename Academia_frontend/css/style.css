@@ -95,14 +95,16 @@ body {
 
 header {
   display: flex;
-  margin: 50px 50px 50px 200px;
+  margin: 50px;
   justify-content: center;
 
 }
 /*===landingTitle===*/
 #landingTitle {
-    font-size: 4em;
+  font-size: 4em;
   text-shadow: 1px 2px #fba257;
+  margin-left: 200px;
+  padding-top: 50px;
 }
 
 /*===h1===*/
@@ -110,13 +112,14 @@ h1 {
   color: white;
   text-align: center;
   padding-bottom: 20px;
+
 }
 
 /*===main===*/
 #main {
   width:100%;
 display: flex;
-margin: 90px;
+margin: 20px 90px;
 justify-content: center;
 justify-content: space-around;
 align-items:center;

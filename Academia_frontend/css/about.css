@@ -64,11 +64,10 @@ i {
 }
 
 /*===BODY===*/
-body {
-  font-size: 1em;
+body, html {
+  font-size: 16px;
   line-height: 1.5;
-
-  /* background: linear-gradient(rgba(255,255,255, 0.6), rgba(255,255,255,0.6)), url('../imgs/frontend/home/home_desktop.jpg'); */
+  background: linear-gradient(to bottom left, rgba(255,255,255, 0.8), rgba(255,255,255,0.2)), url('../imgs/about/about_desktop.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;

@@ -1,7 +1,9 @@
 console.log("js is linked!");
 //===LANDING===//
+
 //TOKEN
 let token;
+
 //FORM VARIABLES
 const signUpBtn = document.querySelector('#signUpBtn');
 const logInBtn = document.querySelector('#logInBtn');
@@ -9,10 +11,12 @@ const signUpForm = document.querySelector('#signUpForm');
 const logInForm = document.querySelector('#logInForm');
 const signUpSubmit = document.querySelector(".signUpSubmit");
 const logInSubmit = document.querySelector(".logInSubmit");
+
 //REGISTER USER ACCT VARIABLES Inputs
 const email = document.querySelector('#signUp-email');
 const password = document.querySelector('#signUp-pw');
 const username = document.querySelector('#signUp-userName');
+
 //LOG IN USER ACCT VARIABLES
 const logInUserName = document.querySelector('#logIn-Username');
 const logInPassword = document.querySelector('#logIn-pw');
@@ -33,9 +37,9 @@ function createUser(e) {
                'Content-Type': 'application/json'
            },
            body: JSON.stringify({
-               email: email.value.trim(),
-               password: password.value.trim(),
-               username: username.value.trim()
+               email: email.value.trim().toUpperCase(),
+               password: password.value.trim().toUpperCase(),
+               username: username.value.trim().toUpperCase()
            })
    })
 
@@ -75,8 +79,8 @@ if(logInUserName.value !== "" && logInPassword.value !== "") {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-          username: logInUserName.value.trim(),
-          password: logInPassword.value.trim()
+          username: logInUserName.value.trim().toUpperCase(),
+          password: logInPassword.value.trim().toUpperCase()
         })
     })
 
