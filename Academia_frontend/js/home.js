@@ -125,8 +125,8 @@ if(newPostBody.value !== "") {
       window.location.reload(true);
   })
 
-  .catch((err) => {
-      console.log(err);
+  .catch((error) => {
+      console.log(error);
   })
 
 } else {
@@ -154,7 +154,7 @@ function deletePost(postId) {
       alert("This Is Not Your Post To Fight. (Mind your own posts!)");
     }
     })
-    .then((error) => {
+    .catch((error) => {
       console.log(error);
     })
 }
@@ -162,73 +162,75 @@ function deletePost(postId) {
 
 //VIEW COMMENTS
 function viewComments(event) {
-  const postId = event.target.parentNode.id;
-  fetch((`http://localhost:8181/post/get-${postId}`), {
-    headers: {
-      "Authorization": "Bearer " + localStorage.getItem('user'),
-      "Content-Type": "application/json"
-    }
-  })
-  .then((res) => {
-    return res.json();
-  })
 
-  .then((res) => {
-    console.log(res, "res in view comments");
-    //console.log(res.comments, "res comments array");
-
-    //create comment related elements
-  const commentDiv = document.createElement('div');
-
-    const commentsArr = res.comments;
-    //console.log(commentsArr, "commentsArr");
-
-    //if there are no comments for post
-    if(commentsArr.length == 0) {
-      const noCommentsMsg = document.createElement('p');
-      noCommentsMsg.classList.add('noCommentsMsg');
-      noCommentsMsg.innerText = "No Comments Yet. Have something to say? Comment away~";
-      event.target.parentNode.append(noCommentsMsg);
-    } else {
-
-      for(let i=0; i < commentsArr.length; i++) {
-
-        //comment id needed to delete comment
-        const commentId = commentsArr[i].id;
-        console.log(commentId, "comment id")
-
-        //individual comment
-        const commentDiv = document.createElement('div');
-        commentDiv.classList.add('commentDiv');
-
-        const commentBody = document.createElement('p');
-        commentBody.classList.add("commentBody");
-
-        commentBody.innerText = `Young ${commentsArr[i].user.username} says, \" ${commentsArr[i].comment_body.trim()} \"`;
-
-        //creates deleteCommentBtn
-        const deleteCommentBtn = document.createElement('button');
-        deleteCommentBtn.innerText = "delete comment";
-        deleteCommentBtn.classList.add('deleteCommentBtn');
-
-        //deleteCommentBtn addEventListener
-        deleteCommentBtn.addEventListener('click', function(event) {
-          event.preventDefault();
-          deleteComment(commentId)
-        });
-
-        commentDiv.append(commentBody, deleteCommentBtn);
-
-console.log(commentDiv, "commentDiv");
-
-        event.target.parentNode.appendChild(commentDiv);
+    const postId = event.target.parentNode.id;
+    fetch((`http://localhost:8181/post/get-${postId}`), {
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem('user'),
+        "Content-Type": "application/json"
       }
-    }
+    })
+    .then((res) => {
+      return res.json();
+    })
 
-    })
-    .then((error) => {
-      console.log(error);
-    })
+    .then((res) => {
+
+      //create comment related elements
+      const commentDiv = document.createElement('div');
+
+      const commentsArr = res.comments;
+      //console.log(commentsArr, "commentsArr");
+
+      //if there are no comments for post
+      if(commentsArr.length == 0) {
+        btnPressCounter();
+        const noCommentsMsg = document.createElement('p');
+        noCommentsMsg.classList.add('noCommentsMsg');
+        noCommentsMsg.innerText = "No Comments Yet. Have something to say? Comment away~";
+        event.target.parentNode.append(noCommentsMsg);
+      }
+      //if there are comments for post
+      else {
+        btnPressCounter();
+
+        for(let i=0; i < commentsArr.length; i++) {
+
+          //comment id needed to delete comment
+          const commentId = commentsArr[i].id;
+          //console.log(commentId, "comment id")
+
+          //individual comment
+          const commentDiv = document.createElement('div');
+          commentDiv.classList.add('commentDiv');
+
+          const commentBody = document.createElement('p');
+          commentBody.classList.add("commentBody");
+
+          commentBody.innerText = `Young ${commentsArr[i].user.username} says, \" ${commentsArr[i].comment_body.trim()} \"`;
+
+          //creates deleteCommentBtn
+          const deleteCommentBtn = document.createElement('button');
+          deleteCommentBtn.innerText = "delete comment";
+          deleteCommentBtn.classList.add('deleteCommentBtn');
+
+          //deleteCommentBtn addEventListener
+          deleteCommentBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+            deleteComment(commentId)
+          });
+
+          commentDiv.append(commentBody, deleteCommentBtn);
+
+          event.target.parentNode.appendChild(commentDiv);
+
+        }
+      }
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+
 }
 
 
@@ -250,7 +252,7 @@ function deleteComment(commentId) {
       alert("This Is Not Your Comment To Fight. (Mind your own comments!)");
     }
     })
-    .then((error) => {
+    .catch((error) => {
       console.log(error);
     })
 }
@@ -258,6 +260,7 @@ function deleteComment(commentId) {
 
 //CREATE COMMENT BOX
 function createCommentBox(event){
+
   const postId = event.target.parentNode.getAttribute("id");
   console.log(event.target.parentNode.id, 'post id in createCommentBox');
 
@@ -282,8 +285,16 @@ function createCommentBox(event){
   });
 
   event.target.parentNode.append(createCommentDiv);
-}
 
+
+  //prevents multiply comment boxes from appearing at one time
+  if(document.querySelectorAll(".createCommentDiv").length > 1) {
+    alert("Get talking!");
+    const existingCommentBox = document.querySelector(".createCommentDiv");
+    existingCommentBox.remove(document.querySelector(".createCommentDiv"));
+  }
+
+}
 
 //CREATE COMMENT
 function createComment(postId) {
@@ -320,11 +331,19 @@ function createComment(postId) {
     alert("What? You have nothing to say?");
   }
 
-
-
-
 }
 
+//button count - stops user from viewing comments more than once
+let btnPressCount = 0;
+function btnPressCounter(){
+
+  if(btnPressCount == 0) {
+    btnPressCount++;
+  } else {
+  alert("You are viewing comments already.");
+  window.location.reload(false);
+}
+}
 
 
 //GET USERNAME - unnecessary due to removal of:
