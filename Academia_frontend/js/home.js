@@ -36,6 +36,7 @@ function listAllPosts () {
   const postBody = document.createElement('p');
   const postAuthor = document.createElement('span');
   postAuthor.classList.add("postAuthor");
+  postBody.classList.add("postBody");
 
     //gives postdiv an id of actual post
     postDiv.id = `${res[i].id}`;
@@ -106,18 +107,18 @@ function createPost(event) {
     const newPostTitle = document.querySelector('#newPostTitle');
     const newPostBody = document.querySelector('#newPostBody');
 
-//as long as new post body is not an empty string
-if(newPostBody.value.trim() !== "" && newPostTitle.value.trim() !== "") {
-  fetch("http://localhost:8181/post/create", {
-      method: 'POST',
-      headers: {
-        "Authorization": "Bearer " + localStorage.getItem('user'),
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-          post_title: newPostTitle.value,
-          post_body: newPostBody.value
-      })
+  //submits new post content as long as inputs are empty
+  if(newPostBody.value.trim() !== "" && newPostTitle.value.trim() !== "") {
+    fetch("http://localhost:8181/post/create", {
+        method: 'POST',
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem('user'),
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            post_title: newPostTitle.value,
+            post_body: newPostBody.value
+        })
   })
 
   //add new post to dom by forcing page to refresh, which would call listAllPosts again
@@ -145,6 +146,7 @@ function deletePost(postId) {
       "Content-Type": "application/json"
     }
   })
+
   .then((res) => {
     //console.log(res, "res in delete post");
     if (res.status == 200) {
@@ -154,11 +156,13 @@ function deletePost(postId) {
       alert("This Is Not Your Post To Fight. (Mind your own posts!)");
     }
     })
+
     .catch((error) => {
       console.log(error);
     })
 }
 
+//*===COMMENTS===*//
 
 //VIEW COMMENTS
 function viewComments(event) {
@@ -305,7 +309,7 @@ function createComment(postId) {
 
   //console.log(createCommentInput, "createCommentInput");
 
-  if(createCommentInput.value !== "") {
+  if(createCommentInput.value.trim() !== "") {
     fetch(`http://localhost:8181/comment/createOn${postId}`, {
         method: 'POST',
         headers: {
@@ -330,74 +334,19 @@ function createComment(postId) {
         console.log(err);
     })
   }  else {
-    alert("What? You have nothing to say?");
+    alert("No comment? This is not a PRESS conference. Say something!");
   }
 
 }
 
-//button count - stops user from viewing comments more than once
+//view comments button count - stops user from viewing comments more than once
 let btnPressCount = 0;
 function btnPressCounter(){
 
   if(btnPressCount == 0) {
     btnPressCount++;
   } else {
-  alert("You are viewing comments already.");
+  alert("You are viewing the comments display already.");
   window.location.reload(false);
 }
 }
-
-
-//GET USERNAME - unnecessary due to removal of:
-// @JsonIdentityInfo(
-//         generator = ObjectIdGenerators.PropertyGenerator.class,
-//         property = "id"
-// )
-//from USER model
-//
-// previously in listAllPosts
-// if(res[i].user.id){
-//   userLookup(res[i].user.id, postId);
-//
-//
-//   } else {
-//   userLookup(res[i].user, postId);
-//
-// }
-//
-//postAuthor.innerHTML = `|| author: <span class="username"></span>`;
-//postAuthor.setAttribute("author_id", postId);
-//
-// function userLookup(u, p){
-//
-// let username = "";
-// console.log(p, "p");
-// const authorTarget = document.querySelector(`[author_id = "${p}"]`).children[0];
-//
-// console.log(authorTarget, "authorTarget");
-//
-//   fetch('http://localhost:8181/listUsers', {
-//        headers: {
-//            "Authorization": "Bearer " + localStorage.getItem('user'),
-//            "Content-Type" : "application/json"
-//        }
-// })
-//
-// .then((res) => {
-//   return res.json();
-// })
-//
-// .then((res) => {
-//   for(let i = 0; i < res.length; i++) {
-//     if(res[i].id == u) {
-//       username = res[i].username;
-//
-//       authorTarget.innerText = username;
-//     }
-//
-//
-//   }
-//
-// })
-//
-// }

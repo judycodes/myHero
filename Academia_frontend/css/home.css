@@ -46,11 +46,13 @@ span {
 a {
   text-decoration: none;
   font-variant: small-caps;
+  outline-color: #fba257;
 }
 
 a:hover {
   color: #f44242;
   border-bottom: 1px dotted #f44242;
+  text-shadow: 0px 1px #fba257;
 }
 
 li {
@@ -69,15 +71,14 @@ button {
   font-variant: small-caps;
   padding: 8px;
   margin: 5px 20px;
-  outline: none;
-  border: none;
+
 }
 
-button:hover {
+button:focus, button:active, button:hover {
   color: #fba257;
   border: 1px solid #fba257;
+  outline: none;
 }
-
 
 #createPostBtn {
   padding: 5px;
@@ -86,6 +87,7 @@ button:hover {
 /*===IMAGES===*/
 i {
   font-size: 2.5em;
+  padding: 0px 5px;
 }
 
 /*===BODY===*/
@@ -144,10 +146,9 @@ header {
   flex-grow: 2;
 }
 
-/* individual post styling
-.post {
-  margin-right: 50px;
-} */
+.postBody {
+  padding-left: 30px;
+}
 
 .username {
   font-size: 25px;
@@ -207,6 +208,7 @@ input, textarea {
   font-size: 0.8em;
   padding: 5px;
   width: 250px;
+  outline-color: #fba257;
 }
 
 textarea {
