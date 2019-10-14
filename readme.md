@@ -45,13 +45,13 @@ _Backend_
 
 #### Wireframes
 _Homepage Design_ <br/>
-   <img alt = "Academia Home Page" src="imgs/MHA_1.png"/>
+   <img alt = "Academia Home Page" src="imgs/MHA_1.jpg"/>
    
 _Landing and Profile Page Designs_ <br/>
-   <img alt = "Academia Landing and Profile Page" src="imgs/MHA_2.png"/>
+   <img alt = "Academia Landing and Profile Page" src="imgs/MHA_2.jpg"/>
    
 _About Page Design_ <br/>
-   <img alt = "Academia About Page" src="imgs/MHA_3.png"/>
+   <img alt = "Academia About Page" src="imgs/MHA_3.jpg"/>
    
 ### Completions
 Working Functions
