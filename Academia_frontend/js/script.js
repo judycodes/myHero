@@ -1,7 +1,9 @@
 console.log("js is linked!");
 //===LANDING===//
+
 //TOKEN
 let token;
+
 //FORM VARIABLES
 const signUpBtn = document.querySelector('#signUpBtn');
 const logInBtn = document.querySelector('#logInBtn');
@@ -9,10 +11,12 @@ const signUpForm = document.querySelector('#signUpForm');
 const logInForm = document.querySelector('#logInForm');
 const signUpSubmit = document.querySelector(".signUpSubmit");
 const logInSubmit = document.querySelector(".logInSubmit");
+
 //REGISTER USER ACCT VARIABLES Inputs
 const email = document.querySelector('#signUp-email');
 const password = document.querySelector('#signUp-pw');
 const username = document.querySelector('#signUp-userName');
+
 //LOG IN USER ACCT VARIABLES
 const logInUserName = document.querySelector('#logIn-Username');
 const logInPassword = document.querySelector('#logIn-pw');
@@ -24,32 +28,43 @@ function createUser(e) {
  localStorage.setItem('username', username.value);
  localStorage.setItem('primaryEmail', email.value);
 
- if(email.value !== "" && password.value !== "" && username.value !== "") {
+//trim() to avoid whitespaces in inputs being submitted to db
+ if(email.value.trim() !== "" && password.value.trim() !== "" && username.value.trim() !== "") {
+
    fetch('http://localhost:8181/signup', {
            method: 'POST',
            headers: {
                'Content-Type': 'application/json'
            },
            body: JSON.stringify({
-               email: email.value,
-               password: password.value,
-               username: username.value
+               email: email.value.trim().toUpperCase(),
+               password: password.value.trim().toUpperCase(),
+               username: username.value.trim().toUpperCase()
            })
    })
+
+   .then(res => {
+            if (res.status == 500) {
+                alert(`A hero already exists with that name and/or email address. \n Try another superhero name and/or email address.`);
+            } else {
+                return res.json();
+            }
+        })
+
    .then((res) => {
-       return res.json();
+       token = res.token;
+       localStorage.setItem('user', token);
+       redirectHome();
    })
-   .then((res) => {
-    token = res.token;
-    localStorage.setItem('user', token); 
-     redirectHome();
-   })
+
    .catch((err) => {
        console.log(err);
    })
+
  } else {
-    alert("Young User, all fields must be provided to completed before you can be a HERO! Try applying to be a hero again soon!");
+    alert(`Young hero, all fields must be provided to enter U.A.!\nTry applying to be a hero again soon!`);
   }
+
 }
 
 //===LOGIN FUNCTION===//
@@ -59,31 +74,36 @@ function returningUser(e) {
    localStorage.setItem('username', logInUserName.value);
 
 if(logInUserName.value !== "" && logInPassword.value !== "") {
+
   fetch('http://localhost:8181/login/', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-          username: logInUserName.value,
-          password: logInPassword.value
+          username: logInUserName.value.trim().toUpperCase(),
+          password: logInPassword.value.trim().toUpperCase()
         })
     })
+
     .then(res => {
       return res.json();
     })
+
     .then(res => {
       token = res.token;
-      localStorage.setItem('user', token);
-      redirectHome();
+      //as long as a token is provided for the user, then the user will be redirected to the homepage
+      if(res.token !== null) {
+        localStorage.setItem('user', token);
+        redirectHome();
+      } //if username/password does not match an account in the database, user will not be redirected to homepage and will be informed
+      else {
+        alert(`Villains are everywhere! No one can be trusted. \n Check your credentials again. \n Your username or password is incorrect. \n Or you are no hero at U.A. High School.`);
+      }
+
     })
+
     .catch(error => {
       console.error(error);
     });
-}
-//not working if user does not exist
-else if (localStorage.getItem('user') == null) {
-  alert("Villains are at the gates. Please input your credentials again!");
-} else {
-  alert("Welcome back! Unfortunately, your credentials do not match our Superhero Database. Please try again.")
 }
 
  }

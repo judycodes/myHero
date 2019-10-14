@@ -12,7 +12,6 @@ function listAllPosts () {
           "Authorization": "Bearer " + localStorage.getItem('user'),
           "Content-Type" : "application/json"
       }
-
   })
 
  .then((res) => {
@@ -22,7 +21,6 @@ function listAllPosts () {
 .then((res) => {
 
   //console.log("list posts", res);
-
   const postsDisplay = document.querySelector('#postsDisplay');
 
   //loop through posts in database - places recent posts on top of page
@@ -37,9 +35,11 @@ function listAllPosts () {
   const postBody = document.createElement('p');
   const postAuthor = document.createElement('span');
   postAuthor.classList.add("postAuthor");
+  postBody.classList.add("postBody");
 
     //gives postdiv an id of actual post
     postDiv.id = `${res[i].id}`;
+    postDiv.classList.add("postDiv");
 
     //adds post content to created post title and post body elements
     postTitle.innerText = res[i].post_title;
@@ -62,12 +62,12 @@ function listAllPosts () {
   const showCommentBoxBtn = document.createElement('button');
   showCommentBoxBtn.innerText = "create comment";
 
+  //display comment box addEventListener
   showCommentBoxBtn.addEventListener("click", function(event){
     event.preventDefault();
     createCommentBox(event);
   });
   //===view comments related elements===//
-
   const viewCommentsBtn = document.createElement('button');
 
     //view comments button styling
@@ -80,15 +80,11 @@ function listAllPosts () {
       viewComments(event);
     });
 
-//adds post to each postDiv element
-
-    const commentsDisplay = document.createElement('div');
-    commentsDisplay.setAttribute("id", "commentsDisplay");
-
+  //adds post to each postDiv element
   postTitle.append(postAuthor);
-  postDiv.append(postTitle, postBody, deletePostBtn, viewCommentsBtn, showCommentBoxBtn, commentsDisplay);
+  postDiv.append(postTitle, postBody, deletePostBtn, viewCommentsBtn, showCommentBoxBtn);
 
-//adds all posts to postsDisplay
+  //adds all posts to postsDisplay
   postsDisplay.appendChild(postDiv);
 
   }
@@ -108,20 +104,22 @@ createPostBtn.addEventListener('click', createPost);
 function createPost(event) {
     event.preventDefault();
 
+    //new post related elements
     const newPostTitle = document.querySelector('#newPostTitle');
     const newPostBody = document.querySelector('#newPostBody');
 
-if(newPostBody.value !== "") {
-  fetch("http://localhost:8181/post/create", {
-      method: 'POST',
-      headers: {
-        "Authorization": "Bearer " + localStorage.getItem('user'),
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-          post_title: newPostTitle.value,
-          post_body: newPostBody.value
-      })
+  //submits new post content as long as inputs are empty
+  if(newPostBody.value.trim() !== "" && newPostTitle.value.trim() !== "") {
+    fetch("http://localhost:8181/post/create", {
+        method: 'POST',
+        headers: {
+          "Authorization": "Bearer " + localStorage.getItem('user'),
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            post_title: newPostTitle.value.trim(),
+            post_body: newPostBody.value.trim()
+        })
   })
 
   //add new post to dom by forcing page to refresh, which would call listAllPosts again
@@ -129,10 +127,10 @@ if(newPostBody.value !== "") {
       window.location.reload(true);
   })
 
-  .catch((err) => {
-      console.log(err);
+  .catch((error) => {
+      console.log(error);
   })
-
+  //handles empty inputs
 } else {
   alert("Please fill in all fields, before you submit!");
 }
@@ -142,6 +140,7 @@ if(newPostBody.value !== "") {
 //DELETE POST
 function deletePost(postId) {
 
+  //deletes post by post id
   fetch((`http://localhost:8181/post/delete-${postId}`), {
     method: 'DELETE',
     headers: {
@@ -149,94 +148,114 @@ function deletePost(postId) {
       "Content-Type": "application/json"
     }
   })
+
   .then((res) => {
     //console.log(res, "res in delete post");
+
+    //determines if user is allowed to delete post
+      //user can delete if post was created by user
     if (res.status == 200) {
       window.location.reload(true);
       alert("Post Was Defeated!");
+      //user is informed that the post cannot be deleted if current user is not the author
     } else if (res.status == 405){
       alert("This Is Not Your Post To Fight. (Mind your own posts!)");
     }
     })
-    .then((error) => {
+
+    .catch((error) => {
       console.log(error);
     })
 }
 
+//*===COMMENTS===*//
 
 //VIEW COMMENTS
 function viewComments(event) {
-  const postId = event.target.parentNode.id;
-  fetch((`http://localhost:8181/post/get-${postId}`), {
-    headers: {
-      "Authorization": "Bearer " + localStorage.getItem('user'),
-      "Content-Type": "application/json"
-    }
-  })
-  .then((res) => {
-    return res.json();
-  })
+  //btnPressCounter();
 
-  .then((res) => {
-    console.log(res, "res in view comments");
-    //console.log(res.comments, "res comments array");
+    //post id needed to delete comment from post
+    const postId = event.target.parentNode.id;
 
-    //create comment related elements
-  const commentDiv = document.createElement('div');
-
-    const commentsArr = res.comments;
-    //console.log(commentsArr, "commentsArr");
-
-    //if there are no comments for post
-    if(commentsArr == [] || commentsArr.length == 0) {
-      const noCommentsMsg = document.createElement('p');
-      noCommentsMsg.classList.add('noCommentsMsg');
-      noCommentsMsg.innerText = "No Comments Yet. Have something to say? Comment away~";
-      event.target.parentNode.append(noCommentsMsg);
-    } else {
-
-      for(let i=0; i < commentsArr.length; i++) {
-
-        //comment id needed to delete comment
-        const commentId = commentsArr[i].id;
-
-        //individual comment
-        const commentDiv = document.createElement('div');
-        commentDiv.classList.add('commentDiv');
-
-        const commentBody = document.createElement('p');
-
-        commentBody.innerText = `Young ${commentsArr[i].user.username} says: ${commentsArr[i].comment_body}`;
-
-        //creates deleteCommentBtn
-        const deleteCommentBtn = document.createElement('button');
-        deleteCommentBtn.innerText = "delete comment";
-        deleteCommentBtn.classList.add('deleteCommentBtn');
-
-        //deleteCommentBtn addEventListener
-        deleteCommentBtn.addEventListener('click', function(event) {
-          event.preventDefault();
-          deleteComment(commentId)
-        });
-
-        commentDiv.append(commentBody, deleteCommentBtn);
-
-console.log(commentDiv, "commentDiv");
-
-        const commentsDisplay = document.getElementById("commentsDisplay");
-        commentsDisplay.appendChild(commentDiv);
+    fetch((`http://localhost:8181/post/get-${postId}`), {
+      headers: {
+        "Authorization": "Bearer " + localStorage.getItem('user'),
+        "Content-Type": "application/json"
       }
-    }
+    })
 
+    .then((res) => {
+      return res.json();
     })
-    .then((error) => {
-      console.log(error);
-    })
+
+    .then((res) => {
+
+      //create comment related elements
+      const commentDiv = document.createElement('div');
+
+      //array of comments for specific post
+      const commentsArr = res.comments;
+      //console.log(commentsArr, "commentsArr");
+
+      //handles if there are no comments for post
+      if(commentsArr.length == 0) {
+
+        const noCommentsMsg = document.createElement('p');
+        noCommentsMsg.classList.add('noCommentsMsg');
+        noCommentsMsg.innerText = "No Comments Yet. Have something to say? Comment away~";
+        event.target.parentNode.append(noCommentsMsg);
+      }
+
+      //if there are comments for specific post
+      else {
+
+        for(let i=0; i < commentsArr.length; i++) {
+
+          //comment id needed to delete comment
+          const commentId = commentsArr[i].id;
+          //console.log(commentId, "comment id")
+
+          //individual comment related elements
+          const commentDiv = document.createElement('div');
+          commentDiv.classList.add('commentDiv');
+
+          const commentBody = document.createElement('p');
+          commentBody.classList.add("commentBody");
+
+          commentBody.innerText = `Young ${commentsArr[i].user.username} says, \" ${commentsArr[i].comment_body.trim()} \"`;
+
+          //creates deleteCommentBtn
+          const deleteCommentBtn = document.createElement('button');
+          deleteCommentBtn.innerText = "delete comment";
+          deleteCommentBtn.classList.add('deleteCommentBtn');
+
+          //deleteCommentBtn addEventListener
+          deleteCommentBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+            deleteComment(commentId)
+          });
+
+          commentDiv.append(commentBody, deleteCommentBtn);
+
+          //appends comment div containing comment body and delete button to bottom of post div
+          event.target.parentNode.appendChild(commentDiv);
+
+        }
+
+      }
+
+      })
+
+      .catch((error) => {
+        console.log(error);
+      })
+
 }
 
 
 //DELETE COMMENT
 function deleteComment(commentId) {
+  //deletes comment by comment id
   fetch((`http://localhost:8181/comment/delete-${commentId}`), {
     method: 'DELETE',
     headers: {
@@ -244,16 +263,22 @@ function deleteComment(commentId) {
       "Content-Type": "application/json"
     }
   })
+
   .then((res) => {
-    console.log(res, "res in delete comment");
+    //handles if user can delete comment
+    //console.log(res, "res in delete comment");
+
+      //if comment belongs to user, comment can be deleted
     if (res.status == 200) {
       window.location.reload(false);
       alert("Comment Was Defeated!");
+      //if comment does not belong to user, user is informed that the comment cannot be deleted
     } else if (res.status == 405){
       alert("This Is Not Your Comment To Fight. (Mind your own comments!)");
     }
     })
-    .then((error) => {
+
+    .catch((error) => {
       console.log(error);
     })
 }
@@ -261,6 +286,7 @@ function deleteComment(commentId) {
 
 //CREATE COMMENT BOX
 function createCommentBox(event){
+
   const postId = event.target.parentNode.getAttribute("id");
   console.log(event.target.parentNode.id, 'post id in createCommentBox');
 
@@ -284,9 +310,18 @@ function createCommentBox(event){
 
   });
 
+  //attaches comment box to bottom of post div content
   event.target.parentNode.append(createCommentDiv);
-}
 
+
+  //prevents multiply comment boxes from appearing at one time
+  if(document.querySelectorAll(".createCommentDiv").length > 1) {
+    alert("Get commenting!");
+    const existingCommentBox = document.querySelector(".createCommentDiv");
+    existingCommentBox.remove(document.querySelector(".createCommentDiv"));
+  }
+
+}
 
 //CREATE COMMENT
 function createComment(postId) {
@@ -295,7 +330,7 @@ function createComment(postId) {
 
   //console.log(createCommentInput, "createCommentInput");
 
-  if(createCommentInput.value !== "") {
+  if(createCommentInput.value.trim() !== "") {
     fetch(`http://localhost:8181/comment/createOn${postId}`, {
         method: 'POST',
         headers: {
@@ -303,85 +338,39 @@ function createComment(postId) {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            comment_body: createCommentInput.value
+            comment_body: createCommentInput.value.trim()
         })
     })
 
     .then((res) => {
       return res.json();
     })
+
     //add new post to dom by forcing page to refresh, which would call listAllPosts again
     .then((res) => {
       alert("You have had your say!");
       window.location.reload(false);
-      // console.log(postId, "create comment submit");
-      // viewComments(event);
     })
 
     .catch((err) => {
         console.log(err);
     })
+
+    //handles empty or whitespace comment input
   }  else {
-    alert("What? You have nothing to say?");
+    alert("No comment? This is not a PRESS conference. Say something!");
   }
-
-
-
 
 }
 
-
-
-//GET USERNAME - unnecessary due to removal of:
-// @JsonIdentityInfo(
-//         generator = ObjectIdGenerators.PropertyGenerator.class,
-//         property = "id"
-// )
-//from USER model
+//view comments button count - stops user from viewing comments more than once
+// let btnPressCount = 0;
+// function btnPressCounter(){
 //
-// previously in listAllPosts
-// if(res[i].user.id){
-//   userLookup(res[i].user.id, postId);
-//
-//
+//   if(btnPressCount == 0) {
+//     btnPressCount++;
 //   } else {
-//   userLookup(res[i].user, postId);
-//
+//   alert("You are viewing the comments display already.");
+//   window.location.reload(false);
 // }
-//
-//postAuthor.innerHTML = `|| author: <span class="username"></span>`;
-//postAuthor.setAttribute("author_id", postId);
-//
-// function userLookup(u, p){
-//
-// let username = "";
-// console.log(p, "p");
-// const authorTarget = document.querySelector(`[author_id = "${p}"]`).children[0];
-//
-// console.log(authorTarget, "authorTarget");
-//
-//   fetch('http://localhost:8181/listUsers', {
-//        headers: {
-//            "Authorization": "Bearer " + localStorage.getItem('user'),
-//            "Content-Type" : "application/json"
-//        }
-// })
-//
-// .then((res) => {
-//   return res.json();
-// })
-//
-// .then((res) => {
-//   for(let i = 0; i < res.length; i++) {
-//     if(res[i].id == u) {
-//       username = res[i].username;
-//
-//       authorTarget.innerText = username;
-//     }
-//
-//
-//   }
-//
-// })
-//
 // }
